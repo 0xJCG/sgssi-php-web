@@ -19,6 +19,7 @@
 			<div class="clear"></div>
 			<div id="maincontent">
 <?php
+	//Codigo Login
 	if (!isset($_SESSION['codigo'])) {
 		if (isset($_POST['login']) && $_POST['login'] == 1) {
 			require('includes/conexiones.php');
