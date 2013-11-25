@@ -6,7 +6,7 @@ label {
     display: block;
     font-weight: bold;
     text-align: left;
-    width: 300px;
+    width: 258px;
 }
 
 .red {
@@ -19,7 +19,7 @@ label {
     font-size: 12px;
     font-weight: normal;
     text-align: left;
-    width: 300px;
+    width: 258px;
 }
 
 input {
@@ -27,7 +27,7 @@ input {
     font-size: 14px;
     margin: 2px 0 10px;
     padding: 4px 2px;
-    width: 292px;
+    width: 250px;
 }
 
 select {
@@ -35,7 +35,7 @@ select {
     font-size: 14px;
     margin: 2px 0 10px;
     padding: 4px 2px;
-    width: 300px;
+    width: 258px;
 }
 
 textarea {

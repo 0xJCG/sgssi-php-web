@@ -41,6 +41,7 @@
 						<br />
 						<input type="hidden" name="login" value="1" />
 						<input class="boton" type="submit" value="Conectar" />
+						<input class="boton" type="button" value="Registrar" />
 					</p>
 				</form>
 <?php

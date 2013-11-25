@@ -31,6 +31,7 @@
 						<br />
 						<input type="hidden" name="login" value="1" />
 						<input class="boton" type="submit" value="Registrar" />
+						<input class="boton" type="button" value="Volver" />
 					</p>
 				</form>
 <?php	
