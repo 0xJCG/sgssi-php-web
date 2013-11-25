@@ -23,7 +23,7 @@
 		if (isset($_POST['login']) && $_POST['login'] == 1) {
 			require('includes/conexiones.php');
 			$cn = new Connection();
-			$login_successful = $cn->login($_POST['nombre'], hash("sha512", $_POST['pass']));
+			$login_successful = $cn->login($_POST['user'], hash("sha512", $_POST['pass']));
 			if ($login_successful) {
 				if (!empty($_SESSION['codigo']))
 					echo "\t\t\t\t" . '<p>Se ha conectado correctamente.</p>' . "\n";
