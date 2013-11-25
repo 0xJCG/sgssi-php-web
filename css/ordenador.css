@@ -201,23 +201,3 @@ p#done_msg {
     letter-spacing: 0.1ex;
 	margin: 10px auto 15px auto;
 }
-
-.clear {
-	clear: both;
-}
-
-.movistar {
-	color: #0000FF;
-}
-
-.orange {
-	color: #FFA500;
-}
-
-.propia {
-	color: #000000;
-}
-
-.vodafone {
-	color: #FF0000;
-}

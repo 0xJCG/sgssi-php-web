@@ -3,22 +3,9 @@
 	$previous_encoding = mb_internal_encoding();
 	mb_internal_encoding('UTF-8');
 	mb_internal_encoding($previous_encoding);
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
-	<head>
-		<title>Seguridad</title>
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-		<link href="css/ordenador.css" type="text/css" rel="stylesheet" />
-	</head>
-	<body>
-		<div id="container">
-			<div id="header"><!--div: menubar, adbar, sidebar-->
-				<h1 id="pr_title"><a href="index.php">Seguridad</a></h1>
-			</div>
-			<div class="clear"></div>
-			<div id="maincontent">
-<?php
+
+	require_once('interfaz/cabecera.html');
+	
 	//Codigo Login ola ke ase
 	if (!isset($_SESSION['codigo'])) {
 		if (isset($_POST['login']) && $_POST['login'] == 1) {
@@ -67,12 +54,6 @@
 			echo "\t\t\t\t" . '<p><a href="index.php?logout=1">Desconectar.</a></p>' . "\n";
 		}
 	}
+	
+	require_once('interfaz/pie.html');
 ?>
-			</div>
-			<div class="clear"></div>
-			<div id="footer">
-				<p>Web realizada por Jonathan Castro, Alberto Fern&aacute;ndez y Arkaitz Marcos &copy; 2013.</p>
-			</div>
-		</div>
-	</body>
-</html>
