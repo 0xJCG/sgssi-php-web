@@ -19,7 +19,7 @@
 			<div class="clear"></div>
 			<div id="maincontent">
 <?php
-	//Codigo Login
+	//Codigo Login ola ke ase
 	if (!isset($_SESSION['codigo'])) {
 		if (isset($_POST['login']) && $_POST['login'] == 1) {
 			require('includes/conexiones.php');
