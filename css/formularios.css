@@ -1,0 +1,59 @@
+form {
+	text-align: left;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    text-align: left;
+    width: 180px;
+}
+
+.red {
+	color: #FF0000;
+}
+
+.small {
+    color: #708090;
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: left;
+    width: 180px;
+}
+
+input {
+    border: 1px solid #AACFE4;
+    font-size: 14px;
+    margin: 2px 0 10px;
+    padding: 4px 2px;
+    width: 172px;
+}
+
+select {
+    border: 1px solid #AACFE4;
+    font-size: 14px;
+    margin: 2px 0 10px;
+    padding: 4px 2px;
+    width: 180px;
+}
+
+textarea {
+    border: 1px solid #AACFE4;
+    font-size: 14px;
+    margin: 2px 0 10px;
+    padding: 4px 2px;
+    width: 550px;
+}
+
+.boton {
+    background-color: #b9c9fe;
+	border: 1px solid #AACFE4;
+	-webkit-border-radius: 2em;
+	-moz-border-radius: 2em;
+	border-radius: 2em;
+    color: #039;
+	cursor: pointer;
+	font-size: 12px;
+    width: 125px;
+}
