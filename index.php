@@ -33,7 +33,7 @@
 				}
 			}
 			else {
-				echo "\t\t\t\t" . '<p>No se ha podido conectar.</p>' . "\n";
+				echo "\t\t\t\t" . '<p>No se ha podido conectar.</p>';
 				session_destroy();
 			}
 		} else {
@@ -56,6 +56,14 @@
 					</p>
 				</form>
 <?php
+		}
+	} else {
+		if (isset($_GET['logout']) && $_GET['logout'] == 1) {
+			session_destroy();
+			echo "\t\t\t\t" . '<p>Te has desconectado.</p>' . "\n";
+		} else {
+			echo "\t\t\t\t" . '<p>Conectado.</p>' . "\n";
+			echo "\t\t\t\t" . '<p><a href="index.php?logout=1">Desconectar.</a></p>' . "\n";
 		}
 	}
 ?>
