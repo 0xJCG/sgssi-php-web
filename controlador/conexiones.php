@@ -1,9 +1,9 @@
 <?php
-	require_once("bd.php");
+	require_once 'baseDeDatos.php';
 	class Connection {
 		var $cn;
 		function Connection() {
-			$this->cn = DatabaseLayer::getConnection("MySqlProvider");
+			$this->cn = new BaseDeDatos();
 		}
 		function login($user, $pass) {
 			$rs = $this->query("SELECT codigo, nombre FROM usuarios WHERE nombre = ? AND contrasena = ?", array($user, $pass));

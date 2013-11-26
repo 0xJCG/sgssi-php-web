@@ -9,6 +9,11 @@ label {
     width: 258px;
 }
 
+#formulario {
+	width: 100%;
+	margin: 0 auto;
+}
+
 .red {
 	color: #FF0000;
 }
