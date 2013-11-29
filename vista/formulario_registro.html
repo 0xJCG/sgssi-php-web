@@ -16,7 +16,7 @@
 					    	if ( !expr.test(email) )
 					        	alert("Error: La dirección de correo " + email + " es incorrecta.");
 						}
-					function comprobarUsuario()
+					/*function comprobarUsuario()
 					{
 						var usuario = document.formulario.usermail.value;
 						var esta = $.ajax({
@@ -32,13 +32,13 @@
 						{
 							alert("El usuario " + usuario + " ya esta ocupado.");
 						}
-					}
+					}*/
 					function comprobarDatos()
 					{
 						var mail = document.formulario.usermail.value;
 						validarEmail(mail);
 						comprobarContraseñas();
-						comprobarUsuario();
+						//comprobarUsuario();
 					}
 				
 				</script>
