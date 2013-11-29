@@ -16,28 +16,34 @@
 					    	if ( !expr.test(email) )
 					        	alert("Error: La dirección de correo " + email + " es incorrecta.");
 						}
-					function comprobarUsuario()
+					/*function comprobarUsuario()
 					{
+						alert("llegue aqui 2");
 						var usuario = document.formulario.usermail.value;
-						var esta = $.ajax({
+						var esta = false;
+						if(!usuario == "")
+						{
+							esta = $.ajax({
 							type: "POST",
-							url: "../controlador/conexiones.php",
-							data: {"usuario"},
+							url: "conexiones.php",
+							data: {dato: "usuario"},
 							success: comprobarUsuario(data)
 								{
 									alert(data);
 								}
 							});
-						if ( esta == false )
+						}
+						if (esta == false)
 						{
 							alert("El usuario " + usuario + " ya esta ocupado.");
 						}
-					}
+					}*/
 					function comprobarDatos()
 					{
 						var mail = document.formulario.usermail.value;
 						validarEmail(mail);
 						comprobarContraseñas();
+						alert("llegue aqui 1");
 						//comprobarUsuario();
 					}
 				</script>
