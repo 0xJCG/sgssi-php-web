@@ -16,17 +16,29 @@
 					    	if ( !expr.test(email) )
 					        	alert("Error: La dirección de correo " + email + " es incorrecta.");
 						}
-					function comprobarDatos()
-						{
-							var mail = document.formulario.usermail.value;
-							validarEmail(mail);
-							comprobarContraseñas();
-						}
 					function comprobarUsuario()
 					{
 						var usuario = document.formulario.usermail.value;
-						var esta = false;
-						if()
+						var esta = $.ajax({
+							type: "POST",
+							url: "../controlador/conexiones.php",
+							data: {"usuario"},
+							success: comprobarUsuario(data)
+								{
+									alert(data);
+								}
+							});
+						if ( esta == false )
+						{
+							alert("El usuario " + usuario + " ya esta ocupado.");
+						}
+					}
+					function comprobarDatos()
+					{
+						var mail = document.formulario.usermail.value;
+						validarEmail(mail);
+						comprobarUsuario();
+						comprobarContraseñas();
 					}
 				
 				</script>

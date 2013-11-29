@@ -5,7 +5,7 @@
 	mb_internal_encoding($previous_encoding);
 
 	require_once 'vista/cabecera.html';
-	require_once 'vista/formulario_conectar.html';
+	require_once 'vista/formulario_registro.html';
 ?>
 		<!--
 		<noscript>

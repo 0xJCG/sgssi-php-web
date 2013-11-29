@@ -37,7 +37,7 @@
 			}
 			else
 			{
-				return false;
+				return false;	
 			}
 		}
 		function change($email, $pass, $passverif) {
