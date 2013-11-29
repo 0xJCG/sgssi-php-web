@@ -29,6 +29,17 @@
 				return true;
 			}
 		}
+		function comprobarUsuario($user) {
+			$rs = $this->queryScalar("SELECT nombre FROM usuario WHERE nombre = ?", array($user));
+			if(empty($rs))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 		function change($email, $pass, $passverif) {
 			$password = $this->queryScalar("SELECT pass FROM usuarios WHERE id = ?", array($_SESSION['id']));
 			if ($password != $passverif)
