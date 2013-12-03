@@ -1,21 +1,17 @@
-				<head>
 				<script type="text/javascript">
+					function comprobarContrasenas(c1, c2) {
+						if (c1 != c2)
+							return false;
+						return true;
+					}
 					
-					function comprobarContraseñas()
-						{
-						var contrasena1 = document.formulario.pass1.value;
-						var contrasena2 = document.formulario.pass2.value;
-						if (contrasena1 != contrasena2)
-							{
-								window.alert ("Las contraseñas son distintas");	
-							}
-						}
-					function validarEmail( email )
-						{
-					    	expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-					    	if ( !expr.test(email) )
-					        	alert("Error: La dirección de correo " + email + " es incorrecta.");
-						}
+					function validarCorreo(c) {
+					    expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+					    if (!expr.test(c))
+					        return false;
+					    return true;
+					}
+					
 					/*function comprobarUsuario()
 					{
 						var usuario = document.formulario.usermail.value;
@@ -37,27 +33,32 @@
 							alert("El usuario " + usuario + " ya esta ocupado.");
 						}
 					}*/
-					function comprobarDatos()
-					{
-						var mail = document.formulario.usermail.value;
-						validarEmail(mail);
-						comprobarContraseñas();
+					
+					function comprobarDatos() {
+						var correo = document.formulario.correo.value;
+						var contrasena1 = document.formulario.pass1.value;
+						var contrasena2 = document.formulario.pass2.value;
+						if (!validarCorreo(correo))
+							document.getElementById("correovalidado").innerHTML = "Correo no v&aacute;lido."
+						if (!comprobarContrasenas(contrasena1, contrasena2))
+							document.getElementById("passvalidada").innerHTML = "Las contra&ntilde;as no coinciden."
+						//else
+							//document.formulario.submit();
 						//comprobarUsuario();
 					}
 				</script>
-				</head>
 				<form name="formulario" action="registro.php" method="post">
 					<p>
 						<label>
 							Nombre de usuario
 							<span class="small">Con un m&aacute;ximo 50 caracteres</span>
 						</label>
-						<input type="text" name="user" maxlength="50" />
+						<input type="text" name="usuario" maxlength="50" /> <span id="usuariovalidado"></span>
 						<label>
 							Correo electr&oacute;nico
 							<span class="small">M&aacute;x. 100 caracteres</span>
 						</label>
-						<input type="text" name="usermail" maxlength="100" />
+						<input type="text" name="correo" maxlength="100" /> <span id="correovalidado"></span>
 						<label>
 							Contrase&ntilde;a
 							<span class="small">Introduzca su contrase&ntilde;a</span>
@@ -67,10 +68,9 @@
 							Contrase&ntilde;a
 							<span class="small">Vuelva a introducir su contrase&ntilde;a</span>
 						</label>
-						<input type="password" name="pass2" maxlength="50" />
+						<input type="password" name="pass2" maxlength="50" /> <span id="passvalidada"></span>
 						<br />
-						<input type="hidden" name="login" value="1" />
-						<input class="boton" name="registrar" type="button" value="Registrar" onclick= comprobarDatos() />
-						<input class="boton" name="volver" type="button" value="Volver" />
+						<input class="boton" name="registrar" type="button" value="Registrar" onclick="comprobarDatos()" />
+						<input class="boton" name="volver" type="button" value="Volver" onclick="javascript:history.back()" />
 					</p>
 				</form>

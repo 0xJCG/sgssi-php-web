@@ -8,11 +8,11 @@
 	
 	//Codigo Login
 	if (!isset($_SESSION['codigo'])) {
-		if (isset($_POST['login']) && $_POST['login'] == 1) {
+		//if (isset($_POST['login']) && $_POST['login'] == 1) {
 			require('controlador/conexiones.php');
 			$cn = new Connection();
-			$salt = $cn->queryScalar("SELECT sal FROM usuarios WHERE nombre = ?", array($_POST['user']));
-			$login_successful = $cn->login($_POST['user'], hash("sha512", hash("sha512", $_POST['pass']) . $salt));
+			$salt = $cn->queryScalar("SELECT sal FROM usuarios WHERE nombre = ?", array($_POST['usuario']));
+			$login_successful = $cn->login($_POST['usuario'], hash("sha512", $_POST['c'] . $salt));
 			if ($login_successful) {
 				if (!empty($_SESSION['codigo']))
 					echo "\t\t\t\t" . '<p>Se ha conectado correctamente.</p>' . "\n";
@@ -24,8 +24,8 @@
 				echo "\t\t\t\t" . '<p>No se ha podido conectar.</p>';
 				session_destroy();
 			}
-		} else
-			require_once('vista/formulario_conectar.html');
+		/*} else
+			require_once('vista/formulario_conectar.html');*/
 	} else {
 		if (isset($_GET['desconectar'])) {
 			session_destroy();
