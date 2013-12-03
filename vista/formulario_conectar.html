@@ -1,18 +1,3 @@
-				<script type="text/javascript">
-					function enviarDatos(formulario, contrasena) {
-						var c = document.createElement("input");
-						c.name = "c";
-						c.type = "hidden";
-						c.value = hex_sha512(contrasena.value);
-						formulario.appendChild(c);
-						contrasena.value = "";
-						formulario.submit();
-					}
-					
-					function irRegistro() {
-						window.open('registro.php','_self')
-					}
-				</script>
 				<form name="formulario" action="conectar.php" method="post">
 					<p>
 						<label>
