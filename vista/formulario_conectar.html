@@ -1,4 +1,4 @@
-				<form name="formulario" action="conectar.php" method="post">
+				<form id="formularioLogin" name="formularioLogin" action="conectar.php" method="post">
 					<p>
 						<label>
 							Nombre de usuario
@@ -11,7 +11,7 @@
 						</label>
 						<input type="password" name="pass" maxlength="50" />
 						<br />
-						<input class="boton" name="conectar" type="button" value="Conectar" onclick="enviarDatos(this.form, this.form.pass)" />
-						<input class="boton" name="registrar" type="button" value="Registrar" onclick="irRegistro()" />
+						<input class="boton" name="conectar" type="submit" value="Conectar" />
+						<input class="boton" name="registrar" type="button" value="Registrar" onclick="window.open('registro.php','_self')" />
 					</p>
 				</form>

@@ -4,14 +4,23 @@
 	mb_internal_encoding('UTF-8');
 	mb_internal_encoding($previous_encoding);
 
-	require_once 'vista/cabecera.html';
-	require_once 'vista/formulario_conectar.html';
+	require_once 'vista/cabecera.php';
+	require('controlador/conexiones.php');
+	
+	$cn = new Connection();
+	$rs = $cn->query("SELECT titulo, mensaje, nombre, fecha FROM mercado, usuarios WHERE mercado.usuario = usuarios.codigo", array());
+	
+	for ($i = 0; $i < count($rs); $i++) {
+		echo '<div class="mensaje">';
+		echo '<h2>' . $rs[$i][0] . '</h2>';
+		echo '<h4>Por ' . $rs[$i][2] . ', el ' . $rs[$i][3] . '</h4>';
+		echo '<p>' . $rs[$i][1] . '</p>';
+		echo "</div>";
+	}
 ?>
-		<!--
 		<noscript>
-			<p>Tu navegador no soporta JavaScript o lo tiene deshabilitado. Necesita JavaScript para poder utilizar esta p&aacute;gina web.</p>
+			<p>Su navegador no soporta JavaScript o lo tiene deshabilitado. Necesita JavaScript para poder utilizar esta p&aacute;gina web.</p>
 		</noscript>
-		-->
 <?php
 	require_once 'vista/pie.html';
 ?>

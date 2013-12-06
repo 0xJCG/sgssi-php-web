@@ -6,10 +6,11 @@
 			$this->cn = new BaseDeDatos();
 		}
 		function login($user, $pass) {
-			$rs = $this->query("SELECT codigo, nombre FROM usuarios WHERE nombre = ? AND contrasena = ?", array($user, $pass));
+			$rs = $this->query("SELECT codigo, nombre, tipo FROM usuarios WHERE nombre = ? AND contrasena = ?", array($user, $pass));
 			if (!empty($rs)) {
 				$_SESSION['codigo'] = $rs[0][0];
 				$_SESSION['nombre'] = $rs[0][1];
+				$_SESSION['tipo'] = $rs[0][2];
 				unset($rs);
 				return true;
 			}
@@ -18,27 +19,18 @@
 				return false;
 			}
 		}
-		function register($user, $email, $pass) {
-			$rs = $this->queryScalar("SELECT nombre FROM usuarios WHERE nombre = ?", array($user));
-			$rs2 = $this->queryScalar("SELECT nombre FROM usuarios WHERE email = ?", array($email));
-			if (!empty($rs) || !empty($rs2))
-				return false;
-			else {
-				unset($rs);
-				$rs = $this->query("INSERT INTO usuarios (nombre, email, pass, date) VALUES (?, ?, ?, ?)", array($user, $email, $pass, date('Y-m-d H:i:s')));
-				return true;
-			}
+		function register($user, $email, $pass, $sal) {
+			//if ($this->comprobarUsuario($user, $email)) {
+				$this->query("INSERT INTO usuarios (nombre, correo, contrasena, sal) VALUES (?, ?, ?, ?)", array($user, $email, $pass, $sal));
+				//return true;
+			/*}
+			return false;*/
 		}
 		function comprobarUsuario($user) {
-			$rs = $this->queryScalar("SELECT nombre FROM usuario WHERE nombre = ?", array($user));
-			if(empty($rs))
-			{
+			$rs = $this->queryScalar("SELECT * FROM usuarios WHERE nombre = ?", array($user));
+			if (!empty($rs))
 				return true;
-			}
-			else
-			{
-				return false;	
-			}
+			return false;
 		}
 		function change($email, $pass, $passverif) {
 			$password = $this->queryScalar("SELECT pass FROM usuarios WHERE id = ?", array($_SESSION['id']));

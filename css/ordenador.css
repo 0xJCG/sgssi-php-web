@@ -58,10 +58,6 @@ a, a:visited {
 	text-align: right;
 }
 
-#header h1 {
-	float: left;
-}
-
 #header p {
 	float: right;
 }
@@ -78,6 +74,14 @@ a, a:visited {
 
 #pr_title a {
 	text-decoration: none;
+}
+
+#pr_title {
+	float: left;
+}
+
+#conectado {
+	float: right;
 }
 
 ul.tariffs {

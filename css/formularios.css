@@ -9,6 +9,13 @@ label {
     width: 258px;
 }
 
+label.error {
+	color: #FF0000;
+	display: inline;
+	margin-left: 10px;
+	width: 500px;
+}
+
 #formulario {
 	width: 100%;
 	margin: 0 auto;

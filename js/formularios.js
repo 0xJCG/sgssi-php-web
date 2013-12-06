@@ -1,61 +1,80 @@
-function comprobarContrasenas(c1, c2) { // Compara las contraseñas.
-	if (c1 != c2)
-		return false;
-	return true;
-}
+/* Codigo JavaScript escrito usando la libreria jQuery. */
+$(document).ready(function() { // Cuando el documento se carga, realiza las funciones siguientes.
+	$('#formularioRegistro').validate({ // Validar el formulario de registro. Usamos el id de HTML que le hemos puesto al formulario.
+		submitHandler: function(form) { // Cuando pulsamos el boton de registrar y todo ha ido bien, se envia el formulario.
+			form.submit();
+		},
+        rules: { // Reglas para validar el formulario.
+	        'usuario': {
+	        	required: true,
+	        	minlength: 2,
+	        	maxlength: 50,
+	        },
+	        'correo': {
+	        	required: true,
+	        	email: true,
+	        	maxlength: 100,
+	        },
+	        'pass1': {
+	        	required: true,
+	        	minlength: 6,
+	        },
+	        /*'pass2': {
+	        	required: true,
+	        	minlength: 6,
+	        	equalTo: "#pass1"
+	        },*/
+        },
+	    messages: { // Los mensajes que se muestran cuando no se cumple alguna de las normal mencionada arriba.
+	        'usuario': {
+	        	required: 'Es obligatorio introducir un nombre de usuario.',
+	        	minlength: 'Tiene que tener 2 caracteres como m&iacute;nimo.',
+	        },
+	        'correo': {
+	        	required: 'Es obligatorio introducir un correo electr&oacute;nico.',
+	        	email: 'El correo electr&oacute;nico ingresado no es correcto.',
+	        },
+	        'pass1': {
+	        	required: 'Es obligatorio introducir una contrase&ntilde;a.',
+	        	minlength: 'Tiene que tener 6 caracteres como m&iacute;nimo.',
+	        },
+	        /*'pass2': {
+	        	required: 'Es obligatorio volver a introducir la contrase&ntilde;a.',
+	        	minlength: 'Tiene que tener 6 caracteres como m&iacute;nimo.',
+	        	equalTo: 'Las contrase&ntilde;as deben coincidir.',
+	        },*/
+	    },
+    });
+	$('#formularioLogin').validate({ // Validar el formulario de login.
+		submitHandler: function(form) { // Cuando pulsamos el boton de conectar y todo ha ido bien, se envia el formulario.
+			form.submit();
+		},
+        rules: { // Reglas para validar el formulario.
+	        'usuario': {
+	        	required: true,
+	        	minlength: 2,
+	        	maxlength: 50,
+	        },
+	        'pass': {
+	        	required: true,
+	        	minlength: 6,
+	        },
+        },
+	    messages: { // Los mensajes que se muestran cuando no se cumple alguna de las normal mencionada arriba.
+	        'usuario': {
+	        	required: 'Es obligatorio introducir un nombre de usuario.',
+	        	minlength: 'Tiene que tener 2 caracteres como m&iacute;nimo.',
+	        },
+	        'pass': {
+	        	required: 'Es obligatorio introducir una contrase&ntilde;a.',
+	        	minlength: 'Tiene que tener 6 caracteres como m&iacute;nimo.',
+	        },
+	    },
+    });
+});
 
-function validarCorreo(c) { // Mira si el correo tiene una estructura de válida.
-    expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    if (!expr.test(c))
-        return false;
-    return true;
-}
-
-/*function comprobarUsuario()
-{
-	var usuario = document.formulario.usermail.value;
-	var esta = false;
-	if(!usuario == "")
-	{
-		esta = $.ajax({
-		type: "POST",
-		url: "conexiones.php",
-		data: {dato: "usuario"},
-		success: comprobarUsuario(data)
-			{
-				alert(data);
-			}
-		});
-	}
-	if (esta == false)
-	{
-		alert("El usuario " + usuario + " ya esta ocupado.");
-	}
-}*/
-
-function comprobarDatos() { // Comprueba los datos del formulario antes de hacer submit.
-	var correo = document.formulario.correo.value;
-	var contrasena1 = document.formulario.pass1.value;
-	var contrasena2 = document.formulario.pass2.value;
-	if (!validarCorreo(correo))
-		document.getElementById("correovalidado").innerHTML = "Correo no v&aacute;lido."
-	if (!comprobarContrasenas(contrasena1, contrasena2))
-		document.getElementById("passvalidada").innerHTML = "Las contra&ntilde;as no coinciden."
-	//else
-		//document.formulario.submit();
-	//comprobarUsuario();
-}
-
-function enviarDatos(formulario, contrasena) { // Creamos un nuevo elemento input para el formulario para enviar la contraseña hasheada.
-	var c = document.createElement("input");
-	c.name = "c";
-	c.type = "hidden";
-	c.value = hex_sha512(contrasena.value);
-	formulario.appendChild(c);
-	contrasena.value = "";
+function enviarDatos(formulario, contrasena1, contrasena2 = "") { // Creamos un nuevo elemento input para el formulario para enviar la contraseña hasheada.
+	contrasena1.value = hex_sha512(contrasena1.value);
+	contrasena2.value = "";
 	formulario.submit();
-}
-
-function irRegistro() { // Carga otra página web.
-	window.open('registro.php','_self')
 }
