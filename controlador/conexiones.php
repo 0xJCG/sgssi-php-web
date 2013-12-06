@@ -26,26 +26,26 @@
 			/*}
 			return false;*/
 		}
-		function comprobarUsuario($user) {
+		function existeUsuario($user) {
 			$rs = $this->queryScalar("SELECT * FROM usuarios WHERE nombre = ?", array($user));
 			if (!empty($rs))
 				return true;
 			return false;
 		}
-		function change($email, $pass, $passverif) {
-			$password = $this->queryScalar("SELECT pass FROM usuarios WHERE id = ?", array($_SESSION['id']));
+		function modificarUsuario($email, $pass, $passverif) {
+			$password = $this->queryScalar("SELECT contrasena FROM usuarios WHERE id = ?", array($_SESSION['codigo']));
 			if ($password != $passverif)
 				return false;
 			else {
-				$rs = $this->queryScalar("SELECT email FROM usuarios WHERE id = ?", array($_SESSION['id']));
+				$rs = $this->queryScalar("SELECT correo FROM usuarios WHERE id = ?", array($_SESSION['codigo']));
 				if ($rs != $email) {
 					unset($rs);
-					$rs = $this->queryScalar("SELECT nombre FROM usuarios WHERE email = ?", array($email));
+					$rs = $this->queryScalar("SELECT nombre FROM usuarios WHERE correo = ?", array($email));
 					if (!empty($rs)) 
 						return false;
 					else {
 						unset($rs);
-						$rs = $this->query("UPDATE usuarios SET email = ?, pass = ? WHERE id = ?", array($email, $pass, $_SESSION['id']));
+						$rs = $this->query("UPDATE usuarios SET correo = ?, contrasena = ? WHERE codigo = ?", array($email, $pass, $_SESSION['codigo']));
 						return true;
 					}
 				}

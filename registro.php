@@ -6,7 +6,6 @@
 	
 	require_once 'vista/cabecera.php';
 	
-	
 	if (isset($_POST['registro']) && $_POST['registro'] == 1) {
 		if ($_SESSION['form_token'] != $_POST['form_token'])
 			require_once 'vista/formulario_registro.php';

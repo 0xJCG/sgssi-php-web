@@ -12,11 +12,16 @@
 	
 	for ($i = 0; $i < count($rs); $i++) {
 		echo '<div class="mensaje">';
-		echo '<h2>' . $rs[$i][0] . '</h2>';
-		echo '<h4>Por ' . $rs[$i][2] . ', el ' . $rs[$i][3] . '</h4>';
+		if ($_SESSION['nombre'] == $rs[$i][2])
+			echo '<p class="opciones">Modificar. Eliminar.</p>';
+		echo '<h2>' . $rs[$i][0] . '</h2>';		
+		echo '<p>Por ' . $rs[$i][2] . ', el ' . $rs[$i][3] . '</p>';
 		echo '<p>' . $rs[$i][1] . '</p>';
 		echo "</div>";
 	}
+	
+	if (isset($_SESSION['codigo']))
+		require_once 'vista/formulario_mercado.php';
 ?>
 		<noscript>
 			<p>Su navegador no soporta JavaScript o lo tiene deshabilitado. Necesita JavaScript para poder utilizar esta p&aacute;gina web.</p>

@@ -84,126 +84,23 @@ a, a:visited {
 	float: right;
 }
 
-ul.tariffs {
-	list-style: none;
-	margin: 15px auto 15px 10px;
-}
-
-ul.tariffs li {
-	color: #6666FF;
-    font-variant: small-caps;
-    letter-spacing: 0.1ex;
-}
-#stats {
-	margin: auto;
-	margin-bottom: 15px;
-    position: relative;
-	text-align: center;
-	width: 500px;
-}
-
-#compare {
-	text-align: center;
-}
-
-#like {
-	float: right;
-}
-
-#nlikes {
-	color: #FF0000;
-	/*float: right;*/
-	font-size: 17px;
-    font-variant: small-caps;
-    letter-spacing: 0.1ex;
-}
-
-#comments {
-	margin-top: 15px;
-}
-
-#comments h2 {
-	margin-bottom: 15px;
-}
-
-#show_comments {
-	padding: 0 10px;
-}
-
-#newComment {
-	margin: 15px auto 0 10px;
-}
-
-#pages {
-	color: #6666FF;
-	float: left;
-    font-variant: small-caps;
-    letter-spacing: 0.1ex;
-	margin: 5px auto 15px 0;
-}
-
-#pages a {
-	text-decoration: underline;
-}
-
-.comment {
-	background-color: #e8edff;
+.mensaje {
+	background-color: #FFFFFF;
+	border: 1px solid #AACFE4;
 	-webkit-border-radius: 2em;
 	-moz-border-radius: 2em;
 	border-radius: 2em;
-	margin-bottom: 10px;
-	padding: 15px;
+	margin-top: 15px;
+    padding: 15px;
+}
+
+.opciones {
+	float: right;
 }
 
 .message {
 	font-size: 14px;
 	margin-bottom: 15px;
-}
-
-.userdate, .user {
-	float: right;
-	font-size: 10px;
-}
-
-.ratings {
-	float: left;
-	font-size: 10px;
-}
-
-#similar {
-	margin: 15px 0 15px 10px;
-}
-
-p.tsimilar {
-	color: #6666FF;
-    font-variant: small-caps;
-    letter-spacing: 0.1ex;
-}
-
-p#no_comments {
-	font-variant: small-caps;
-    letter-spacing: 0.1ex;
-	margin: 0 0 15px 10px;
-}
-
-p#no_similar {
-	font-variant: small-caps;
-    letter-spacing: 0.1ex;
-	margin: 15px 0 15px 10px;
-}
-
-p#error_msg {
-	color: #FF0000;
-    font-variant: small-caps;
-    letter-spacing: 0.1ex;
-	margin: 10px auto 15px auto;
-}
-
-p#done_msg {
-	color: #00FF00;
-    font-variant: small-caps;
-    letter-spacing: 0.1ex;
-	margin: 10px auto 15px auto;
 }
 
 .clear {

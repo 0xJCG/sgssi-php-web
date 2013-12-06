@@ -1,25 +1,30 @@
 				<div class="formulario">
-					<h1>Formulario de registro</h1>
-					<form id="formularioRegistro" name="formularioRegistro" action="registro.php" method="post">
+					<h1>Panel de usuario</h1>
+					<form id="formularioPanel" name="formularioPanel" action="panel.php" method="post">
 						<p>
 							<label>
 								Nombre de usuario
 								<span class="small">Con un m&aacute;ximo 50 caracteres</span>
 							</label>
-							<input type="text" name="usuario" maxlength="50" />
+							<input type="text" name="usuario" maxlength="50" value="<?php echo $rs[0][0]; ?>" disabled="disabled" />
 							<label>
 								Correo electr&oacute;nico
 								<span class="small">M&aacute;x. 100 caracteres</span>
 							</label>
-							<input type="text" name="correo" maxlength="100" />
+							<input type="text" name="correo" value="<?php echo $rs[0][1]; ?>" maxlength="100" />
 							<label>
 								Contrase&ntilde;a
 								<span class="small">Introduzca su contrase&ntilde;a</span>
 							</label>
-							<input id="pass1" type="password" name="pass1" maxlength="50" /> <span id="fuerzaPass"></span>
+							<input id="pass" type="password" name="pass" maxlength="50" />
+							<label>
+								Nueva contrase&ntilde;a
+								<span class="small">Introduzca su nueva contrase&ntilde;a</span>
+							</label>
+							<input id="pass1" type="password" name="pass1" maxlength="50" />
 							<label>
 								Contrase&ntilde;a
-								<span class="small">Vuelva a introducir su contrase&ntilde;a</span>
+								<span class="small">Vuelva a introducir su nueva contrase&ntilde;a</span>
 							</label>
 							<input type="password" name="pass2" maxlength="50" />
 							<br />
@@ -31,10 +36,9 @@
 	$_SESSION['form_token'] = $form_token;
 ?>
 							<input type="hidden" name="form_token" value="<?php echo $form_token; ?>" />
-							<input type="hidden" name="registro" value="1" />
-							<input class="boton" name="registrar" type="submit" value="Registrar" />
+							<input type="hidden" name="modificado" value="1" />
+							<input class="boton" name="modificar" type="submit" value="Modificar" />
 							<!-- <input class="boton" name="registrar" type="button" value="Registrar" onclick="comprobarDatos(this.form)" /> -->
-							<input class="boton" name="volver" type="button" value="Volver" onclick="javascript:history.back()" />
 						</p>
 					</form>
 				</div>

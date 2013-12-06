@@ -13,7 +13,7 @@
 		<div id="container">
 			<div id="header"><!--div: menubar, adbar, sidebar-->
 				<h1 id="pr_title"><a href="index.php">Mercado de segunda mano</a></h1>
-				<h1 id="conectado">&iexcl;Hola, <?php echo (isset($_SESSION['nombre']))?$_SESSION['nombre'] . '! <a href="conectar.php?desconectar">Desconectar.</a>':'an&oacute;nimo! <a href="conectar.php">Conectar.</a>' ?></h1>
+				<h1 id="conectado">&iexcl;Hola, <?php echo (isset($_SESSION['nombre']))?'<a href="panel.php">' . $_SESSION['nombre'] . '</a>' . '! <a href="conectar.php?desconectar">Desconectar.</a>':'an&oacute;nimo! <a href="conectar.php">Conectar.</a>' ?></h1>
 			</div>
 			<div class="clear"></div>
 			<div id="maincontent">
