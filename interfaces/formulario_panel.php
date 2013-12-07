@@ -2,32 +2,21 @@
 					<h1>Panel de usuario</h1>
 					<form id="formularioPanel" name="formularioPanel" action="panel.php" method="post">
 						<p>
-							<label>
-								Nombre de usuario
-								<span class="small">Con un m&aacute;ximo 50 caracteres</span>
-							</label>
 							<input type="text" name="usuario" maxlength="50" value="<?php echo $_SESSION['nombre']; ?>" disabled="disabled" />
-							<label>
-								Correo electr&oacute;nico
-								<span class="small">M&aacute;x. 100 caracteres</span>
-							</label>
+						</p>
+						<p>
 							<input type="text" name="correo" value="<?php echo $_SESSION['correo']; ?>" maxlength="100" />
-							<label>
-								Contrase&ntilde;a
-								<span class="small">Introduzca su contrase&ntilde;a</span>
-							</label>
-							<input id="pass" type="password" name="pass" maxlength="50" />
-							<label>
-								Nueva contrase&ntilde;a
-								<span class="small">Introduzca su nueva contrase&ntilde;a</span>
-							</label>
-							<input id="pass1" type="password" name="pass1" maxlength="50" />
-							<label>
-								Contrase&ntilde;a
-								<span class="small">Vuelva a introducir su nueva contrase&ntilde;a</span>
-							</label>
-							<input type="password" name="pass2" maxlength="50" />
-							<br />
+						</p>
+						<p>
+							<input id="pass" type="password" name="pass" maxlength="50" placeholder="Actual contrase&ntilde;a" />
+						</p>
+						<p>
+							<input id="pass1" type="password" name="pass1" maxlength="50" placeholder="Nueva contrase&ntilde;a" />
+						</p>
+						<p>
+							<input type="password" name="pass2" maxlength="50" placeholder="Vuelva a escribir la nueva contrase&ntilde;a" />
+						</p>
+						<p>
 <?php
 	/*** set a form token ***/
 	$form_token = md5( uniqid('auth', true) );

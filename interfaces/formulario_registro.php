@@ -2,27 +2,18 @@
 					<h1>Formulario de registro</h1>
 					<form id="formularioRegistro" name="formularioRegistro" action="registro.php" method="post">
 						<p>
-							<label>
-								Nombre de usuario
-								<span class="small">Con un m&aacute;ximo 50 caracteres</span>
-							</label>
-							<input type="text" name="usuario" maxlength="50" />
-							<label>
-								Correo electr&oacute;nico
-								<span class="small">M&aacute;x. 100 caracteres</span>
-							</label>
-							<input type="text" name="correo" maxlength="100" />
-							<label>
-								Contrase&ntilde;a
-								<span class="small">Introduzca su contrase&ntilde;a</span>
-							</label>
-							<input id="pass1" type="password" name="pass1" maxlength="50" /> <span id="fuerzaPass"></span>
-							<label>
-								Contrase&ntilde;a
-								<span class="small">Vuelva a introducir su contrase&ntilde;a</span>
-							</label>
-							<input type="password" name="pass2" maxlength="50" />
-							<br />
+							<input type="text" name="usuario" maxlength="50" placeholder="Usuario" />
+						</p>
+						<p>
+							<input type="text" name="correo" maxlength="100" placeholder="Correo electr&oacute;nico" />
+						</p>
+						<p>
+							<input id="pass1" type="password" name="pass1" maxlength="50" placeholder="Contrase&ntilde;a" />
+						</p>
+						<p>
+							<input type="password" name="pass2" maxlength="50" placeholder="Vuelva a escribir la contrase&ntilde;a" />
+						</p>
+						<p>
 <?php
 	/*** set a form token ***/
 	$form_token = md5( uniqid('auth', true) );

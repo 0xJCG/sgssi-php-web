@@ -2,22 +2,15 @@
 					<h1>A&ntilde;adir un nuevo elemento al mercado</h1>
 					<form id="formularioMercado" name="formularioMercado" action="index.php" method="post">
 						<p>
-							<label>
-								T&iacute;tulo
-								<span class="small">Con un m&aacute;ximo 50 caracteres</span>
-							</label>
-							<input type="text" name="titulo" maxlength="50" />
-							<label>
-								Descripci&oacute;n
-								<span class="small">M&aacute;x. 1000 caracteres</span>
-							</label>
-							<input type="text" name="descripcion" maxlength="1000" />
-							<label>
-								Imagen
-								<span class="small">Opcional: seleccione una imagen a mostrar en el mensaje</span>
-							</label>
+							<input type="text" name="titulo" maxlength="50" placeholder="T&iacute;tulo del mensaje" />
+						</p>
+						<p>
+							<input type="text" name="descripcion" maxlength="1000" placeholder="Descripci&oacute;n del mensaje" />
+						</p>
+						<p>
 							<input type="file" name="imagen" />
-							<br />
+						</p>
+						<p>
 <?php
 	/*** set a form token ***/
 	$form_token = md5( uniqid('auth', true) );

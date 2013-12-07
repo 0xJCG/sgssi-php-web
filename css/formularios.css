@@ -8,17 +8,6 @@
     padding: 15px;
 }
 
-form {
-	text-align: left;
-}
-
-label {
-    display: block;
-    font-weight: bold;
-    text-align: left;
-    width: 508px;
-}
-
 label.error {
 	color: #FF0000;
 	display: inline;
@@ -26,55 +15,24 @@ label.error {
 	width: 400px;
 }
 
-#formulario {
-	width: 100%;
-	margin: 0 auto;
-}
-
-.red {
-	color: #FF0000;
-}
-
-.small {
-    color: #708090;
-    display: block;
-    font-size: 12px;
-    font-weight: normal;
-    text-align: left;
-    width: 508px;
-}
-
-input {
-    border: 1px solid #AACFE4;
-    font-size: 14px;
-    margin: 2px 0 10px;
-    padding: 4px 2px;
-    width: 500px;
-}
-
-select {
-    border: 1px solid #AACFE4;
-    font-size: 14px;
-    margin: 2px 0 10px;
-    padding: 4px 2px;
-    width: 508px;
-}
-
-textarea {
-    border: 1px solid #AACFE4;
-    font-size: 14px;
-    margin: 2px 0 10px;
-    padding: 4px 2px;
-    width: 550px;
-}
-
-.boton {
-    background-color: #b9c9fe;
-	border: 1px solid #AACFE4;
+input, textarea {
+    border: 1px solid #0066FF;
 	-webkit-border-radius: 2em;
 	-moz-border-radius: 2em;
 	border-radius: 2em;
-    color: #039;
+	color: #FF6600;
+    margin: 2px 0 10px;
+    padding: 5px 5px;
+    width: 300px;
+}
+
+.boton {
+    background-color: #FFFFFF;
+	border: 1px solid #0066FF;
+	-webkit-border-radius: 2em;
+	-moz-border-radius: 2em;
+	border-radius: 2em;
+    color: #FF6600;
 	cursor: pointer;
 	font-size: 12px;
     width: 125px;

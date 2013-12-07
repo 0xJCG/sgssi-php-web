@@ -2,17 +2,12 @@
 					<h1>Formulario de conexi&oacute;n</h1>
 					<form id="formularioLogin" name="formularioLogin" action="conectar.php" method="post">
 						<p>
-							<label>
-								Nombre de usuario
-								<span class="small">Con un m&aacute;ximo de 50 caracteres</span>
-							</label>
-							<input type="text" name="usuario" maxlength="50" />
-							<label>
-								Contrase&ntilde;a
-								<span class="small">Introduzca su contrase&ntilde;a</span>
-							</label>
-							<input id="pass" type="password" name="pass" maxlength="50" />
-							<br />
+							<input type="text" name="usuario" maxlength="50" placeholder="Usuario" />
+						</p>
+						<p>
+							<input id="pass" type="password" name="pass" maxlength="50" placeholder="Contrase&ntilde;a" />
+						</p>
+						<p>
 							<input type="hidden" name="login" value="1" />
 							<input class="boton" type="submit" value="Conectar" />
 							<input class="boton" name="registrar" type="button" value="Registrar" onclick="window.open('registro.php','_self')" />
