@@ -4,8 +4,8 @@
 	mb_internal_encoding('UTF-8');
 	mb_internal_encoding($previous_encoding);
 
-	require_once 'vista/cabecera.php';
-	require_once 'controlador/cusuario.php';
+	require_once 'interfaces/cabecera.php';
+	require_once 'includes/cusuario.php';
 	
 	//Codigo Login
 	if (!isset($_SESSION['codigo'])) {
@@ -24,7 +24,7 @@
 				session_destroy();
 			}
 		} else
-			require_once('vista/formulario_conectar.html');
+			require_once('interfaces/formulario_conectar.html');
 	} else {
 		if (isset($_GET['desconectar'])) {
 			session_destroy();
@@ -35,5 +35,5 @@
 		}
 	}
 	
-	require_once 'vista/pie.html';
+	require_once 'interfaces/pie.html';
 ?>

@@ -4,8 +4,8 @@
 	mb_internal_encoding('UTF-8');
 	mb_internal_encoding($previous_encoding);
 
-	require_once 'vista/cabecera.php';
-	require_once 'controlador/cmercado.php';
+	require_once 'interfaces/cabecera.php';
+	require_once 'includes/cmercado.php';
 ?>
 				<noscript>
 					<p>Su navegador no soporta JavaScript o lo tiene deshabilitado. Necesita JavaScript para poder utilizar esta p&aacute;gina web de manera correcta.</p>
@@ -25,7 +25,7 @@
 	}
 	
 	if (isset($_SESSION['codigo']))
-		require_once 'vista/formulario_mercado.php';
+		require_once 'interfaces/formulario_mercado.php';
 
-	require_once 'vista/pie.html';
+	require_once 'interfaces/pie.html';
 ?>

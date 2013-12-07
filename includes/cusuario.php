@@ -1,5 +1,5 @@
 <?php
-	require_once 'baseDeDatos.php';
+	require_once 'conexionbd.php';
 	
 	/* Clase que nos servira para realizar metodos relacionados con usuarios. */
 	class CUsuario {
@@ -7,7 +7,7 @@
 		
 		/* Constructora de la clase. */
 		public function __construct() {
-			$this->conexion = new BaseDeDatos();
+			$this->conexion = new ConexionBD();
 		}
 		
 		private function getConexion() {

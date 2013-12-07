@@ -1,12 +1,12 @@
 <?php
-	require_once 'conexionMySQL.php'; // Fichero en el que tenemos las clases y métodos para poder conectarnos a nuestra base de datos de MySQL.
+	require_once 'mysql.php'; // Fichero en el que tenemos las clases y métodos para poder conectarnos a nuestra base de datos de MySQL.
 	
-	class BaseDeDatos {
+	class ConexionBD {
 		private $mySQL;
 		private $parametros;
 		
 		public function __construct() {
-			$this->mySQL = new ConexionMySQL();
+			$this->mySQL = new MySQL();
 			if (!$this->mySQL->estaConectada()) {
 				throw new Exception("La conexi&oacute;n a la base de datos no se ha completado.");
 			}

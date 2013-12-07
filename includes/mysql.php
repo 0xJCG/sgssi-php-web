@@ -1,7 +1,7 @@
 <?php
 	require_once 'datos.php'; // Fichero en el que tenemos los datos para poder conectarnos con la base de datos.
 	
-	class ConexionMySQL {
+	class MySQL {
 		private $conexion;
 		
 		public function __construct() { // Nos conectamos con la base de datos.
