@@ -15,18 +15,16 @@
 			$contrasena = $_POST['pass1'];
 			$sal = hash("sha512", substr(sha1(mt_rand()), 0, 22)); // Sal.
 			
-			require('controlador/conexiones.php');
-			$cn = new Connection();
+			require('controlador/cusuario.php');
+			$cusuario = new CUsuario();
 			
-			$cn->register($usuario, $correo, hash("sha512", $contrasena . $sal), $sal);
-			$cn->login($usuario, hash("sha512", $contrasena . $sal));
+			$cusuario->registrar($usuario, $correo, $contrasena, $sal);
 			
 			echo "Usuario $usuario registrado y conectado.";
 		}
 	} else {
 		require_once 'vista/formulario_registro.php';
 	}
-	
 	
 	require_once 'vista/pie.html';
 ?>

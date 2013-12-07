@@ -5,27 +5,27 @@
 	mb_internal_encoding($previous_encoding);
 
 	require_once 'vista/cabecera.php';
-	require('controlador/conexiones.php');
+	require_once 'controlador/cmercado.php';
+?>
+				<noscript>
+					<p>Su navegador no soporta JavaScript o lo tiene deshabilitado. Necesita JavaScript para poder utilizar esta p&aacute;gina web de manera correcta.</p>
+				</noscript>
+<?php
+	$mercado = new CMercado();
+	$datosMercado = $mercado->getMercado();
 	
-	$cn = new Connection();
-	$rs = $cn->query("SELECT titulo, mensaje, nombre, fecha FROM mercado, usuarios WHERE mercado.usuario = usuarios.codigo", array());
-	
-	for ($i = 0; $i < count($rs); $i++) {
+	for ($i = 0; $i < count($datosMercado); $i++) {
 		echo '<div class="mensaje">';
-		if ($_SESSION['nombre'] == $rs[$i][2])
+		if ((isset($_SESSION['nombre']) && $_SESSION['nombre'] == $datosMercado[$i][2]) || (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 1))
 			echo '<p class="opciones">Modificar. Eliminar.</p>';
-		echo '<h2>' . $rs[$i][0] . '</h2>';		
-		echo '<p>Por ' . $rs[$i][2] . ', el ' . $rs[$i][3] . '</p>';
-		echo '<p>' . $rs[$i][1] . '</p>';
+		echo '<h2>' . $datosMercado[$i][0] . '</h2>';		
+		echo '<p>Por ' . $datosMercado[$i][2] . ', el ' . $datosMercado[$i][3] . '</p>';
+		echo '<p>' . $datosMercado[$i][1] . '</p>';
 		echo "</div>";
 	}
 	
 	if (isset($_SESSION['codigo']))
 		require_once 'vista/formulario_mercado.php';
-?>
-		<noscript>
-			<p>Su navegador no soporta JavaScript o lo tiene deshabilitado. Necesita JavaScript para poder utilizar esta p&aacute;gina web.</p>
-		</noscript>
-<?php
+
 	require_once 'vista/pie.html';
 ?>

@@ -11,9 +11,10 @@
 								Contrase&ntilde;a
 								<span class="small">Introduzca su contrase&ntilde;a</span>
 							</label>
-							<input type="password" name="pass" maxlength="50" />
+							<input id="pass" type="password" name="pass" maxlength="50" />
 							<br />
-							<input class="boton" name="conectar" type="submit" value="Conectar" />
+							<input type="hidden" name="login" value="1" />
+							<input class="boton" type="submit" value="Conectar" />
 							<input class="boton" name="registrar" type="button" value="Registrar" onclick="window.open('registro.php','_self')" />
 						</p>
 					</form>

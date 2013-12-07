@@ -8,13 +8,13 @@
 							</label>
 							<input type="text" name="titulo" maxlength="50" />
 							<label>
-								Mensaje
+								Descripci&oacute;n
 								<span class="small">M&aacute;x. 1000 caracteres</span>
 							</label>
-							<input type="text" name="mensaje" maxlength="1000" />
+							<input type="text" name="descripcion" maxlength="1000" />
 							<label>
 								Imagen
-								<span class="small">Introduzca su contrase&ntilde;a</span>
+								<span class="small">Opcional: seleccione una imagen a mostrar en el mensaje</span>
 							</label>
 							<input type="file" name="imagen" />
 							<br />

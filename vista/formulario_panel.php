@@ -6,12 +6,12 @@
 								Nombre de usuario
 								<span class="small">Con un m&aacute;ximo 50 caracteres</span>
 							</label>
-							<input type="text" name="usuario" maxlength="50" value="<?php echo $rs[0][0]; ?>" disabled="disabled" />
+							<input type="text" name="usuario" maxlength="50" value="<?php echo $_SESSION['nombre']; ?>" disabled="disabled" />
 							<label>
 								Correo electr&oacute;nico
 								<span class="small">M&aacute;x. 100 caracteres</span>
 							</label>
-							<input type="text" name="correo" value="<?php echo $rs[0][1]; ?>" maxlength="100" />
+							<input type="text" name="correo" value="<?php echo $_SESSION['correo']; ?>" maxlength="100" />
 							<label>
 								Contrase&ntilde;a
 								<span class="small">Introduzca su contrase&ntilde;a</span>
@@ -36,9 +36,8 @@
 	$_SESSION['form_token'] = $form_token;
 ?>
 							<input type="hidden" name="form_token" value="<?php echo $form_token; ?>" />
-							<input type="hidden" name="modificado" value="1" />
-							<input class="boton" name="modificar" type="submit" value="Modificar" />
-							<!-- <input class="boton" name="registrar" type="button" value="Registrar" onclick="comprobarDatos(this.form)" /> -->
+							<input type="hidden" name="panel" value="1" />
+							<input class="boton" type="submit" value="Modificar" />
 						</p>
 					</form>
 				</div>

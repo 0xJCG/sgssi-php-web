@@ -32,7 +32,7 @@
 ?>
 							<input type="hidden" name="form_token" value="<?php echo $form_token; ?>" />
 							<input type="hidden" name="registro" value="1" />
-							<input class="boton" name="registrar" type="submit" value="Registrar" />
+							<input class="boton" type="submit" value="Registrar" />
 							<!-- <input class="boton" name="registrar" type="button" value="Registrar" onclick="comprobarDatos(this.form)" /> -->
 							<input class="boton" name="volver" type="button" value="Volver" onclick="javascript:history.back()" />
 						</p>

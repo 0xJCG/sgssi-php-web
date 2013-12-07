@@ -5,17 +5,16 @@
 	mb_internal_encoding($previous_encoding);
 
 	require_once 'vista/cabecera.php';
+	require_once 'controlador/cusuario.php';
 	
 	//Codigo Login
 	if (!isset($_SESSION['codigo'])) {
 		if (isset($_POST['login']) && $_POST['login'] == 1) {
-			require('controlador/conexiones.php');
-			$cn = new Connection();
-			$salt = $cn->queryScalar("SELECT sal FROM usuarios WHERE nombre = ?", array($_POST['usuario']));
-			$login_successful = $cn->login($_POST['usuario'], hash("sha512", $_POST['pass'] . $salt));
+			$usuario = new CUsuario();
+			$login_successful = $usuario->login($_POST['usuario'], $_POST['pass']);
 			if ($login_successful) {
 				if (!empty($_SESSION['codigo']))
-					echo "\t\t\t\t" . '<p>Se ha conectado correctamente.</p>' . "\n";
+					echo "\t\t\t\t" . '<p>' . $_SESSION['nombre'] . ' se ha conectado correctamente.</p>' . "\n";
 				else {
 					echo "\t\t\t\t" . '<p>Los datos introducidos son incorrectos.</p>' . "\n";
 					session_destroy();
