@@ -14,7 +14,7 @@
 							<input id="pass1" type="password" name="pass1" maxlength="50" placeholder="Nueva contrase&ntilde;a" />
 						</p>
 						<p>
-							<input type="password" name="pass2" maxlength="50" placeholder="Vuelva a escribir la nueva contrase&ntilde;a" />
+							<input id="pass2" type="password" name="pass2" maxlength="50" placeholder="Vuelva a escribir la nueva contrase&ntilde;a" />
 						</p>
 						<p>
 <?php

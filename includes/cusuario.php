@@ -49,6 +49,7 @@
 		/* Funcion que permite modificar los datos a un usuario. */
 		public function modificarUsuario($email, $nuevaPass, $viejaPass) {
 			$viejaPass = hash("sha512", $viejaPass . $_SESSION['sal']);
+			echo $nuevaPass;
 			
 			if ($nuevaPass == "")
 				$nuevaPass = $viejaPass;

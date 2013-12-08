@@ -13,12 +13,12 @@
 		if ($_SESSION['form_token'] != $_POST['form_token']) {
 			require_once 'interfaces/formulario_panel.php';
 		} else {
-			$correo = filter_var($_POST['correo'], FILTER_SANITIZE_STRING);
-			$contrasenaV = $_POST['pass'];
-			$contrasenaN = $_POST['pass1'];
-			
-			$cusuario->modificarUsuario($correo, $contrasenaN, $contrasenaV);
-			
+			if ($_POST['pass1'] == $_POST['pass2']) {
+				$correo = filter_var($_POST['correo'], FILTER_SANITIZE_STRING);
+				$contrasenaV = $_POST['pass'];
+				$contrasenaN = $_POST['pass1'];
+				$cusuario->modificarUsuario($correo, $contrasenaN, $contrasenaV);
+			}
 			require_once 'interfaces/formulario_panel.php';
 		}
 	} else {
