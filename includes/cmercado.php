@@ -29,6 +29,10 @@
 			return $this->_getConexion()->execute("SELECT titulo, descripcion FROM mercado WHERE codigo = ?", array($codigo));
 		}
 		
+		public function getUsuarioOferta($codigo) {
+			return $this->_getConexion()->executeScalar("SELECT usuario FROM mercado WHERE codigo = ?", array($codigo));
+		}
+		
 		public function anadirOferta($titulo, $descripcion, $imagen) {
 			$this->_getConexion()->execute("INSERT INTO mercado (titulo, descripcion, usuario, ruta_imagen, fecha) VALUES (?, ?, ?, ?, ?)", array($titulo, $descripcion, $_SESSION['codigo'], $imagen, date('Y-m-d H:i:s')));
 		}

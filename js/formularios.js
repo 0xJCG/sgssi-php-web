@@ -136,7 +136,7 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
         },
 	    messages: { // Los mensajes que se muestran cuando no se cumple alguna de las normal mencionadas arriba.
 	        'titulo': {
-	        	required: 'Es obligatorio introducir un t&itulo.',
+	        	required: 'Es obligatorio introducir un t&iacute;tulo.',
 	        	minlength: 'Tiene que tener 5 caracteres como m&iacute;nimo.',
 	        },
 	        'descripcion': {
