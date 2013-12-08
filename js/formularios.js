@@ -148,7 +148,9 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 });
 
 /* Cuando haya que enviar una contrasena al servidor, la hasheamos antes de enviarla y, como ya estan comprobadas, las otras se dejan vacias. */
-function enviarDatos(formulario, contrasena1, contrasena2 = "", contrasena3 = "") {
+function enviarDatos(formulario, contrasena1, contrasena2, contrasena3) {
+	if(typeof(contrasena2)==='undefined') contrasena2 = "";
+	if(typeof(contrasena2)==='undefined') contrasena3 = "";
 	contrasena1.value = hex_sha512(contrasena1.value);
 	contrasena2.value = hex_sha512(contrasena2.value);
 	contrasena3.value = hex_sha512(contrasena3.value);
