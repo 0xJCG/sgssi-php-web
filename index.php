@@ -4,14 +4,14 @@
 	mb_internal_encoding('UTF-8');
 	mb_internal_encoding($previous_encoding);
 
-	require_once 'interfaces/cabecera.php';
-	require_once 'includes/cmercado.php';
+	require 'interfaces/cabecera.php';
+	require 'includes/cmercado.php';
 ?>
 				<noscript>
 					<p>Su navegador no soporta JavaScript o lo tiene deshabilitado. Necesita JavaScript para poder utilizar esta p&aacute;gina web de manera correcta.</p>
 				</noscript>
 <?php
-	$mercado = new CMercado();
+	$mercado = CMercado::getCMercado();
 	
 	if (isset($_POST['anadir'])) {
 		$mercado->anadirOferta($_POST['titulo'], $_POST['descripcion'], $_POST['imagen']);
@@ -23,7 +23,8 @@
 	
 	$datosMercado = $mercado->getMercado();
 	
-	for ($i = 0; $i < count($datosMercado); $i++) {
+	$limite = count($datosMercado);
+	for ($i = 0; $i < $limite; $i++) {
 		echo '<div class="mensaje">';
 		if ((isset($_SESSION['nombre']) && $_SESSION['nombre'] == $datosMercado[$i][3]) || (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 1))
 			echo '<p class="opciones"><a href="index.php?modificar=' . $datosMercado[$i][0] . '">Modificar</a>. <a href="index.php?eliminar=' . $datosMercado[$i][0] . '">Eliminar</a>.</p>';
@@ -39,8 +40,8 @@
 			$titulo = $datosOferta[0][0];
 			$descripcion = $datosOferta[0][1];
 		}
-		require_once 'interfaces/formulario_mercado.php';
+		require 'interfaces/formulario_mercado.php';
 	}
 
-	require_once 'interfaces/pie.html';
+	require 'interfaces/pie.html';
 ?>

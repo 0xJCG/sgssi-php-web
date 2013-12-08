@@ -4,13 +4,13 @@
 	mb_internal_encoding('UTF-8');
 	mb_internal_encoding($previous_encoding);
 
-	require_once 'interfaces/cabecera.php';
-	require_once 'includes/cusuario.php';
+	require 'interfaces/cabecera.php';
+	require 'includes/cusuario.php';
 	
 	//Codigo Login
 	if (!isset($_SESSION['codigo'])) {
 		if (isset($_POST['login']) && $_POST['login'] == 1) {
-			$usuario = new CUsuario();
+			$usuario = CUsuario::getCUsuario();
 			$login_successful = $usuario->login($_POST['usuario'], $_POST['pass']);
 			if ($login_successful) {
 				if (!empty($_SESSION['codigo']))
@@ -24,7 +24,7 @@
 				session_destroy();
 			}
 		} else
-			require_once('interfaces/formulario_conectar.html');
+			require 'interfaces/formulario_conectar.html';
 	} else {
 		if (isset($_GET['desconectar'])) {
 			session_destroy();
@@ -35,5 +35,5 @@
 		}
 	}
 	
-	require_once 'interfaces/pie.html';
+	require 'interfaces/pie.html';
 ?>

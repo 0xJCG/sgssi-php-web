@@ -1,28 +1,35 @@
 <?php
-	require_once 'conexionbd.php';
+	require 'conexionbd.php';
 	
 	/* Clase que nos servira para realizar metodos relacionados con usuarios. */
 	class CUsuario {
-		private $conexion; // variable para guardar una conexion con la base de datos.
+		private $_conexion; // variable para guardar una conexion con la base de datos.
+		private static $_miCUsuario; // Variable estatica en la que guardaremos la unica instancia de esta clase.
 		
 		/* Constructora de la clase. */
-		public function __construct() {
-			$this->conexion = new ConexionBD();
+		private function __construct() {
+			$this->_conexion = ConexionBD::getConexionBD();
 		}
 		
-		private function getConexion() {
-			return $this->conexion;
+		public static function getCUsuario() { // Metodo que nos deja acceder a la unica instancia de esta clase.
+			if (!self::$_miCUsuario)
+				self::$_miCUsuario = new CUsuario();
+			return self::$_miCUsuario;
+		}
+		
+		private function _getConexion() {
+			return $this->_conexion;
 		}
 		
 		/* Funcion que permite a un usuario loguearse en el sistema. */
 		public function login($user, $pass) {
 			/* Recogemos la sal del usuario para poder realizar la comprobacion con la contrasena. */
-			$sal = $this->getConexion()->executeScalar("SELECT sal FROM usuarios WHERE nombre = ?", array($user));
+			$sal = $this->_getConexion()->executeScalar("SELECT sal FROM usuarios WHERE nombre = ?", array($user));
 			
 			$pass = hash("sha512", $pass . $sal);
 			
 			/* Recogemos los datos del usuario de la base de datos. */
-			$datosUsuario = $this->getConexion()->execute("SELECT codigo, nombre, correo, contrasena, tipo FROM usuarios WHERE nombre = ? AND contrasena = ?", array($user, $pass));
+			$datosUsuario = $this->_getConexion()->execute("SELECT codigo, nombre, correo, contrasena, tipo FROM usuarios WHERE nombre = ? AND contrasena = ?", array($user, $pass));
 			if (!empty($datosUsuario)) { // Si no esta vacio quiere decir que el usuario existe.
 				/* Creamos variables de sesion para guardar los datos del usuario para no tener que llamar siempre a la base de datos. */
 				$_SESSION['codigo'] = $datosUsuario[0][0];
@@ -42,7 +49,7 @@
 		/* Funcion que permite a un usuario registrarse y loguearse en el sistema. */
 		public function registrar($user, $email, $pass, $sal) {
 			/* Ejecutamos una sentencia INSERT para añadir al nuevo usuario en la base de datos. */
-			$this->getConexion()->execute("INSERT INTO usuarios (nombre, correo, contrasena, sal) VALUES (?, ?, ?, ?)", array($user, $email, hash("sha512", $pass . $sal), $sal));
+			$this->_getConexion()->execute("INSERT INTO usuarios (nombre, correo, contrasena, sal) VALUES (?, ?, ?, ?)", array($user, $email, hash("sha512", $pass . $sal), $sal));
 			$this->login($user, $pass); // Logueamos al nuevo usuario.
 		}
 		
@@ -60,18 +67,18 @@
 				return false;
 			else {
 				if ($_SESSION['correo'] != $email) { // Si el correo se pretende modificar, debemos buscar que no exista en la base de datos.
-					$correo = $this->getConexion()->executeScalar("SELECT nombre FROM usuarios WHERE correo = ?", array($email));
+					$correo = $this->_getConexion()->executeScalar("SELECT nombre FROM usuarios WHERE correo = ?", array($email));
 					if (!empty($correo)) // Si existe, no podemos continuar.
 						return false;
 					else {
 						$_SESSION['correo'] = $email;
 						$_SESSION['contrasena'] = $nuevaPass;
-						$this->getConexion()->execute("UPDATE usuarios SET correo = ?, contrasena = ? WHERE codigo = ?", array($email, $nuevaPass, $_SESSION['codigo']));
+						$this->_getConexion()->execute("UPDATE usuarios SET correo = ?, contrasena = ? WHERE codigo = ?", array($email, $nuevaPass, $_SESSION['codigo']));
 						return true;
 					}
 				}
 				else {
-					$this->getConexion()->execute("UPDATE usuarios SET correo = ?, contrasena = ? WHERE codigo = ?", array($email, $nuevaPass, $_SESSION['codigo']));
+					$this->_getConexion()->execute("UPDATE usuarios SET correo = ?, contrasena = ? WHERE codigo = ?", array($email, $nuevaPass, $_SESSION['codigo']));
 					return true;
 				}
 			}

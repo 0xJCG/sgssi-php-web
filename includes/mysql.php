@@ -1,23 +1,31 @@
 <?php
-	require_once 'datos.php'; // Fichero en el que tenemos los datos para poder conectarnos con la base de datos.
+	require 'datos.php'; // Fichero en el que tenemos los datos para poder conectarnos con la base de datos.
 	
+	/* Clase con patron de diseno Singleton. */
 	class MySQL {
-		private $conexion;
+		private $_conexion;
+		private static $_miMySQL; // Variable estatica en la que guardaremos la unica instancia de esta clase.
 		
-		public function __construct() { // Nos conectamos con la base de datos.
-			$this->conexion = new mysqli(HOST, USER, PASS, DB); // Los datos los cogemos del fichero que hemos requerido.
+		private function __construct() { // Nos conectamos con la base de datos.
+			$this->_conexion = new mysqli(HOST, USER, PASS, DB); // Los datos los cogemos del fichero que hemos requerido.
+		}
+		
+		public static function getMySQL() { // Metodo que nos deja acceder a la unica instancia de esta clase.
+			if (!self::$_miMySQL)
+				self::$_miMySQL = new MySQL();
+			return self::$_miMySQL;
 		}
 		
 		public function getErrorNo() { // Número del error que hayamos tenido.
-			return mysqli_errno($this->conexion);
+			return mysqli_errno($this->_conexion);
 		}
 		
 		public function getError() { // Error que hayamos tenido.
-			return mysqli_error($this->conexion);
+			return mysqli_error($this->_conexion);
 		}
 		
 		public function ejecutar($sentencia) { // Realizamos una sentencia SQL con la base de datos.
-			return mysqli_query($this->conexion, $sentencia);
+			return mysqli_query($this->_conexion, $sentencia);
 		}
 		
 		public function recogerResultado($resultado) {  // Recogemos el resultado de una sentencia.
@@ -25,11 +33,11 @@
 		}
 		
 		public function estaConectada() { // Comprobamos la conexión con la base de datos.
-			return !is_null($this->conexion);
+			return !is_null($this->_conexion);
 		}
 		
 		public function escapar($parametro) { // Escapamos los caracteres extraños que pueda tener una sentencia.
-			return mysqli_real_escape_string($this->conexion, $parametro);
+			return mysqli_real_escape_string($this->_conexion, $parametro);
 		}
 	}
 ?>
