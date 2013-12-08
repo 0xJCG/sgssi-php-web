@@ -15,6 +15,7 @@
 	$mercado = CMercado::getCMercado();
 	$filtro = new InputFilter();
 	
+	/* Parte del procesamiento de ofertas. */
 	if (isset($_SESSION['codigo'])) { // Evitamos que el que no este logueado en el sistema pueda hacer cosas.
 		if (isset($_POST['anadir'])) { // Cualquiera que este logueado en el sistema puede anadir nuevos elementos.
 			/* Procesamos el titulo y la descripcion para eliminar posibles elementos no deseados en ellos. No debemos fiarnos del usuario. */
@@ -22,7 +23,7 @@
 			$descripcion = $filtro->process($_POST['descripcion']);
 			$mercado->anadirOferta($titulo, $descripcion, $_POST['imagen']);
 		} elseif (isset($_POST['modificar'])) {
-			$codigoOferta = $_GET['modificar'];
+			$codigoOferta = $_POST['modificar'];
 			$usuarioOferta = $mercado->getUsuarioOferta($codigoOferta); // Cogemos el usuario que ha escrito la oferta.
 			if ($usuarioOferta == $_SESSION['codigo'] || $_SESSION['tipo'] == 1) { // Si el usuario que ha pedido modificar la oferta es el mismo que la ha escrito, o ha sido el administrador, modificaremos la oferta.
 				/* Procesamos el titulo y la descripcion para eliminar posibles elementos no deseados en ellos. No debemos fiarnos del usuario. */
@@ -41,8 +42,9 @@
 		}
 	}
 	
-	$datosMercado = $mercado->getMercado();
+	$datosMercado = $mercado->getMercado(); // Pedimos a la base de datos las ofertas disponibles.
 	
+	/* Mostramos dichas ofertas por pantalla. */
 	$limite = count($datosMercado);
 	for ($i = 0; $i < $limite; $i++) {
 		echo "\t\t\t\t" . '<div class="mensaje">' . "\n";
@@ -54,12 +56,19 @@
 		echo "\t\t\t\t" . '</div>' . "\n";
 	}
 	
+	/* Si el usuario esta logueado en el sistema, podra modificar una oferta suya o anadir una nueva. */
 	if (isset($_SESSION['codigo'])) {
-		if (isset($_GET['modificar'])) {
-			$datosOferta = $mercado->getDatosOferta($_GET['modificar']);
-			$titulo = $datosOferta[0][0];
-			$descripcion = $datosOferta[0][1];
+		if (isset($_GET['modificar'])) { // Si el usuario ha pedido modificar una oferta, hay que asegurarse que ese usuario tenga permisos.
+			$codigoOferta = $_GET['modificar'];
+			$usuarioOferta = $mercado->getUsuarioOferta($codigoOferta); // Cogemos el usuario original que ha escrito la oferta.
+			if ($usuarioOferta == $_SESSION['codigo'] || $_SESSION['tipo'] == 1) { // Si el usuario que ha pedido modificar la oferta es el mismo que la ha escrito, o ha sido el administrador, mostraremos el formulario.
+				$datosOferta = $mercado->getDatosOferta($codigoOferta);
+				$titulo = $datosOferta[0][0];
+				$descripcion = $datosOferta[0][1];
+			} else
+				echo "\t\t\t\t" . '<p class="error">No tienes permisos para modificar la oferta seleccionada.</p>' . "\n";
 		}
+		/* Si no ha pedido modificar nada, mostraremos el formulario de anadir oferta. */
 		require 'interfaces/formulario_mercado.php';
 	}
 

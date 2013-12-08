@@ -22,7 +22,7 @@
 							<input type="hidden" name="form_token" value="<?php echo $form_token; ?>" />
 <?php
 	if (isset($_GET['modificar']))
-		echo "\t\t\t\t\t\t\t" . '<input type="hidden" name="modificar" value="' . $_GET['modificar'] .'" />' . "\n";
+		echo "\t\t\t\t\t\t\t" . '<input type="hidden" name="modificar" value="' . $codigoOferta .'" />' . "\n";
 	else
 		echo "\t\t\t\t\t\t\t" . '<input type="hidden" name="anadir" value="1" />' . "\n";
 ?>
