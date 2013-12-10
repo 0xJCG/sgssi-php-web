@@ -10,7 +10,7 @@
 	$cusuario = CUsuario::getCUsuario();
 	
 	if (isset($_SESSION['codigo'])) { // Solo dejaremos acceder al panel de usuario a los usuarios logueado en el sistema.
-		if (isset($_POST['panel']) && $_POST['panel'] == 1) { // Si se ha pulsado el formulario.
+		if (isset($_POST['panel']) && $_POST['panel'] == 1) { // Si se ha enviado el formulario.
 			if ($_SESSION['token'] != $_POST['token']) { // El formulario debe provenir de la pagina adecuada, no debe ser una copia.
 				require 'interfaces/formulario_panel.php';
 			} else { // El formulario es correcto.
@@ -28,10 +28,10 @@
 				}
 				require 'interfaces/formulario_panel.php';
 			}
-		} else {
+		} else { // No se ha enviado el formulario.
 			require 'interfaces/formulario_panel.php';
 		}
-	} else
+	} else // El usuario no tiene permisos.
 		echo "\t\t\t\t" . '<p class="error">No tienes permisos para acceder a esta secci&oacute;n.</p>' . "\n";
 	
 	require 'interfaces/pie.html';

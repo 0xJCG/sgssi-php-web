@@ -50,15 +50,28 @@
 		$datosMercado = $mercado->getMercado(0);
 	
 	/* Mostramos dichas ofertas por pantalla. */
+	/* - \t: es una tabulacion. Es para indentar el codigo cuando se muestra el codigo fuente de una web. */
+	/* - \n: es un salto de linea en el codigo fuente. */
 	$limite = count($datosMercado);
 	if ($limite > 0) { // De no  haber ofertas, mostraremos un "error".
 		for ($i = 0; $i < $limite; $i++) {
 			echo "\t\t\t\t" . '<div class="mensaje">' . "\n";
-			if ((isset($_SESSION['nombre']) && $_SESSION['nombre'] == $datosMercado[$i][3]) || (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 1))
-				echo "\t\t\t\t\t" . '<p class="opciones"><a href="index.php?modificar=' . $datosMercado[$i][0] . '">Modificar</a> <a href="index.php?eliminar=' . $datosMercado[$i][0] . '">Eliminar</a></p>' . "\n";
-			echo "\t\t\t\t\t" . '<h2>' . $datosMercado[$i][1] . '</h2>' . "\n";		
-			echo "\t\t\t\t\t" . '<p>Por ' . $datosMercado[$i][3] . ', el ' . $datosMercado[$i][4] . '</p>' . "\n";
-			echo "\t\t\t\t\t" . '<p>' . $datosMercado[$i][2] . '</p>' . "\n";
+			echo "\t\t\t\t\t" . '<div class="datos_mensaje">' . "\n";
+			echo "\t\t\t\t\t\t" . '<p><img src="imagenes/usuario.png" /> ' . $datosMercado[$i][3] . '</p>' . "\n";
+			echo "\t\t\t\t\t\t" . '<p><img src="imagenes/fecha.png" /> ' . $datosMercado[$i][4] . '</p>' . "\n";
+			echo "\t\t\t\t\t" . '</div>' . "\n";
+			echo "\t\t\t\t\t" . '<div class="cuerpo_mensaje">' . "\n";
+			echo "\t\t\t\t\t\t" . '<h2>' . $datosMercado[$i][1] . '</h2>' . "\n";
+			echo "\t\t\t\t\t\t" . '<p>' . $datosMercado[$i][2] . '</p>' . "\n";
+			echo "\t\t\t\t\t" . '</div>' . "\n";
+			if ((isset($_SESSION['nombre']) && $_SESSION['nombre'] == $datosMercado[$i][3]) || (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 1)) {
+				echo "\t\t\t\t\t" . '<div class="clear"></div>' . "\n";
+				echo "\t\t\t\t\t" . '<div class="opciones_admin">' . "\n";
+				echo "\t\t\t\t\t\t" . '<a href="index.php?modificar=' . $datosMercado[$i][0] . '"><img src="imagenes/modificar.png" /></a>' . "\n";
+				echo "\t\t\t\t\t\t" . '<a href="index.php?eliminar=' . $datosMercado[$i][0] . '"><img src="imagenes/eliminar.png" /></a>' . "\n";
+				echo "\t\t\t\t\t" . '</div>' . "\n";
+			}
+			echo "\t\t\t\t\t" . '<div class="clear"></div>' . "\n";
 			echo "\t\t\t\t" . '</div>' . "\n";
 		}
 	} else

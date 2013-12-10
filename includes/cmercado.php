@@ -22,7 +22,7 @@
 		}
 		
 		public function getMercado($desde) {
-			return $this->getConexion()->execute("SELECT mercado.codigo, titulo, descripcion, nombre, fecha FROM mercado, usuarios WHERE mercado.usuario = usuarios.codigo ORDER BY fecha DESC LIMIT ?, 5", array($desde));
+			return $this->getConexion()->execute("SELECT mercado.codigo, titulo, descripcion, nombre, DATE_FORMAT(fecha,'%d-%m-%Y, %H:%i:%s') as mifecha FROM mercado, usuarios WHERE mercado.usuario = usuarios.codigo ORDER BY fecha DESC LIMIT ?, 5", array($desde));
 		}
 		
 		public function getDatosOferta($codigo) {

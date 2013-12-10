@@ -11,7 +11,7 @@ body {
 }
 
 h1, h2, h3 {
-	color: #6666FF;
+	color: #0066FF;
     font-variant: small-caps;
     letter-spacing: 0.1ex;
 }
@@ -22,7 +22,7 @@ img {
 }
 
 a, a:visited {
-	color: #6666FF;
+	color: #0066FF;
 }
 
 .left {
@@ -93,7 +93,20 @@ a, a:visited {
     padding: 15px;
 }
 
-.opciones {
+.datos_mensaje {
+	background-color: #FFFFFF;
+	border-left: 1px solid #FF6600;
+	float: right;
+	padding: 15px;
+	width: 20%;
+}
+
+.cuerpo_mensaje {
+	float: left;
+	width: 75%;
+}
+
+.opciones_admin {
 	float: right;
 }
 
