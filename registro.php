@@ -12,13 +12,14 @@
 		else {
 			$usuario = filter_var($_POST['usuario'], FILTER_SANITIZE_STRING);
 			$correo = filter_var($_POST['correo'], FILTER_SANITIZE_STRING);
+			$telefono = filter_var($_POST['telefono'], FILTER_SANITIZE_STRING);
 			$contrasena = $_POST['pass1'];
 			$sal = hash("sha512", substr(sha1(mt_rand()), 0, 22)); // Sal.
 			
 			require 'includes/cusuario.php';
 			$cusuario = CUsuario::getCUsuario();
 			
-			$cusuario->registrar($usuario, $correo, $contrasena, $sal);
+			$cusuario->registrar($usuario, $correo, $telefono, $contrasena, $sal);
 			
 			echo "Usuario $usuario registrado y conectado.";
 		}

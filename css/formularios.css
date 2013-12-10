@@ -1,6 +1,6 @@
 .formulario {
 	background-color: #FFFFFF;
-	border: 1px solid #AACFE4;
+	border: 1px solid #0066FF;
 	-webkit-border-radius: 2em;
 	-moz-border-radius: 2em;
 	border-radius: 2em;
@@ -36,4 +36,21 @@ input, textarea {
 	cursor: pointer;
 	font-size: 12px;
     width: 125px;
+}
+
+#espacio_seleccionar_imagen {
+	background: url('../imagenes/imagen.png') 0 0 no-repeat;
+	border: none;
+	height: 29px;
+	margin-bottom: 8px;
+	overflow: hidden;
+	width: 125px;
+}
+
+#seleccionar_imagen {
+	cursor: pointer;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+	margin-left: -145px;
+	opacity: 0;
 }

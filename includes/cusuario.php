@@ -29,15 +29,16 @@
 			$pass = hash("sha512", $pass . $sal);
 			
 			/* Recogemos los datos del usuario de la base de datos. */
-			$datosUsuario = $this->_getConexion()->execute("SELECT codigo, nombre, correo, contrasena, tipo FROM usuarios WHERE nombre = ? AND contrasena = ?", array($user, $pass));
+			$datosUsuario = $this->_getConexion()->execute("SELECT codigo, nombre, correo, telefono, contrasena, tipo FROM usuarios WHERE nombre = ? AND contrasena = ?", array($user, $pass));
 			if (!empty($datosUsuario)) { // Si no esta vacio quiere decir que el usuario existe.
 				/* Creamos variables de sesion para guardar los datos del usuario para no tener que llamar siempre a la base de datos. */
 				$_SESSION['codigo'] = $datosUsuario[0][0];
 				$_SESSION['nombre'] = $datosUsuario[0][1];
 				$_SESSION['correo'] = $datosUsuario[0][2];
-				$_SESSION['contrasena'] = $datosUsuario[0][3];
+				$_SESSION['telefono'] = $datosUsuario[0][3];
+				$_SESSION['contrasena'] = $datosUsuario[0][4];
 				$_SESSION['sal'] = $sal;
-				$_SESSION['tipo'] = $datosUsuario[0][4];
+				$_SESSION['tipo'] = $datosUsuario[0][5];
 				unset($datosUsuario);
 				return true;
 			} else {
@@ -47,14 +48,14 @@
 		}
 		
 		/* Funcion que permite a un usuario registrarse y loguearse en el sistema. */
-		public function registrar($user, $email, $pass, $sal) {
+		public function registrar($user, $email, $telefono, $pass, $sal) {
 			/* Ejecutamos una sentencia INSERT para añadir al nuevo usuario en la base de datos. */
-			$this->_getConexion()->execute("INSERT INTO usuarios (nombre, correo, contrasena, sal) VALUES (?, ?, ?, ?)", array($user, $email, hash("sha512", $pass . $sal), $sal));
+			$this->_getConexion()->execute("INSERT INTO usuarios (nombre, correo, telefono, contrasena, sal) VALUES (?, ?, ?, ?, ?)", array($user, $email, $telefono, hash("sha512", $pass . $sal), $sal));
 			$this->login($user, $pass); // Logueamos al nuevo usuario.
 		}
 		
 		/* Funcion que permite modificar los datos a un usuario. */
-		public function modificarUsuario($email, $nuevaPass, $viejaPass) {
+		public function modificarUsuario($email, $telefono, $nuevaPass, $viejaPass) {
 			$viejaPass = hash("sha512", $viejaPass . $_SESSION['sal']);
 			echo $nuevaPass;
 			
@@ -72,13 +73,17 @@
 						return false;
 					else {
 						$_SESSION['correo'] = $email;
+						$_SESSION['telefono'] = $telefono;
 						$_SESSION['contrasena'] = $nuevaPass;
-						$this->_getConexion()->execute("UPDATE usuarios SET correo = ?, contrasena = ? WHERE codigo = ?", array($email, $nuevaPass, $_SESSION['codigo']));
+						$this->_getConexion()->execute("UPDATE usuarios SET correo = ?, telefono = ?, contrasena = ? WHERE codigo = ?", array($email, $telefono, $nuevaPass, $_SESSION['codigo']));
 						return true;
 					}
 				}
 				else {
-					$this->_getConexion()->execute("UPDATE usuarios SET correo = ?, contrasena = ? WHERE codigo = ?", array($email, $nuevaPass, $_SESSION['codigo']));
+					$_SESSION['correo'] = $email;
+					$_SESSION['telefono'] = $telefono;
+					$_SESSION['contrasena'] = $nuevaPass;
+					$this->_getConexion()->execute("UPDATE usuarios SET correo = ?, telefono = ?, contrasena = ? WHERE codigo = ?", array($email, $telefono, $nuevaPass, $_SESSION['codigo']));
 					return true;
 				}
 			}

@@ -32,7 +32,7 @@ a, a:visited {
 
 #container {
 	background-color: #FFFFFF;
-	border: 1px solid #AACFE4;
+	border: 1px solid #0066FF;
 	-webkit-border-radius: 2em;
 	-moz-border-radius: 2em;
 	border-radius: 2em;
@@ -85,7 +85,7 @@ a, a:visited {
 
 .mensaje {
 	background-color: #FFFFFF;
-	border: 1px solid #AACFE4;
+	border: 1px solid #0066FF;
 	-webkit-border-radius: 2em;
 	-moz-border-radius: 2em;
 	border-radius: 2em;
@@ -104,4 +104,8 @@ a, a:visited {
 
 .clear {
 	clear: both;
+}
+
+#paginas {
+	text-align: center;
 }

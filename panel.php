@@ -16,9 +16,10 @@
 			} else {
 				if ($_POST['pass1'] == $_POST['pass2']) {
 					$correo = filter_var($_POST['correo'], FILTER_SANITIZE_STRING);
+					$telefono = filter_var($_POST['telefono'], FILTER_SANITIZE_STRING);
 					$contrasenaV = $_POST['pass'];
 					$contrasenaN = $_POST['pass1'];
-					$cusuario->modificarUsuario($correo, $contrasenaN, $contrasenaV);
+					$cusuario->modificarUsuario($correo, $telefono, $contrasenaN, $contrasenaV);
 				}
 				require 'interfaces/formulario_panel.php';
 			}

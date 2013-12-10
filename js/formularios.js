@@ -16,6 +16,12 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	        	email: true,
 	        	maxlength: 100,
 	        },
+	        'telefono': {
+	        	required: true,
+	        	digits: true,
+	        	minlength: 9,
+	        	maxlength: 9,
+	        },
 	        'pass1': {
 	        	required: true,
 	        	minlength: 6,
@@ -34,6 +40,12 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	        'correo': {
 	        	required: 'Es obligatorio introducir un correo electr&oacute;nico.',
 	        	email: 'El correo electr&oacute;nico ingresado no es correcto.',
+	        },
+	        'telefono': {
+	        	required: 'Es obligatorio introducir un tel&eacute;fono de contacto.',
+	        	digits: 'El tel&eacute;fono debe ser un n&uacute;mero de 9 cifras.',
+	        	minlength: 'Tiene que tener 9 cifras.',
+	        	maxlength: 'Tiene que tener 9 cifras.',
 	        },
 	        'pass1': {
 	        	required: 'Es obligatorio introducir una contrase&ntilde;a.',
@@ -57,6 +69,12 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	        	email: true,
 	        	maxlength: 100,
 	        },
+	        'telefono': {
+	        	required: true,
+	        	digits: true,
+	        	minlength: 9,
+	        	maxlength: 9,
+	        },
 	        'pass': {
 	        	required: true,
 	        	minlength: 6,
@@ -75,6 +93,12 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	        'correo': {
 	        	required: 'Es obligatorio introducir un correo electr&oacute;nico.',
 	        	email: 'El correo electr&oacute;nico ingresado no es correcto.',
+	        },
+	        'telefono': {
+	        	required: 'Es obligatorio introducir un tel&eacute;fono de contacto.',
+	        	digits: 'El tel&eacute;fono debe ser un n&uacute;mero de 9 cifras.',
+	        	minlength: 'Tiene que tener 9 cifras.',
+	        	maxlength: 'Tiene que tener 9 cifras.',
 	        },
 	        'pass': {
 	        	required: 'Es obligatorio introducir la contrase&ntilde;a para realizar cambios.',
@@ -147,12 +171,15 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
     });
 });
 
-/* Cuando haya que enviar una contrasena al servidor, la hasheamos antes de enviarla y, como ya estan comprobadas, las otras se dejan vacias. */
+/* Cuando haya que enviar una contrasena al servidor, la hasheamos antes de enviarla. */
+/* De esta forma, evitaremos que alguien escuchando la red pueda ver las contrasenas en texto plano. */
 function enviarDatos(formulario, contrasena1, contrasena2, contrasena3) {
-	if(typeof(contrasena2)==='undefined') contrasena2 = "";
-	if(typeof(contrasena2)==='undefined') contrasena3 = "";
 	contrasena1.value = hex_sha512(contrasena1.value);
-	contrasena2.value = hex_sha512(contrasena2.value);
-	contrasena3.value = hex_sha512(contrasena3.value);
+	
+	if (!contrasena2.value==='')
+		contrasena2.value = hex_sha512(contrasena2.value);
+	if (!contrasena3.value==='')
+		contrasena3.value = hex_sha512(contrasena3.value);
+	
 	formulario.submit();
 }

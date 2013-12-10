@@ -8,6 +8,9 @@
 							<input type="text" name="correo" maxlength="100" placeholder="Correo electr&oacute;nico" />
 						</p>
 						<p>
+							<input type="text" name="telefono" maxlength="9" placeholder="Tel&eacute;fono" />
+						</p>
+						<p>
 							<input id="pass1" type="password" name="pass1" maxlength="50" placeholder="Contrase&ntilde;a" />
 						</p>
 						<p>

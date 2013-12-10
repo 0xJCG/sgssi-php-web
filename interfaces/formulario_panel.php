@@ -8,6 +8,9 @@
 							<input type="text" name="correo" value="<?php echo $_SESSION['correo']; ?>" maxlength="100" />
 						</p>
 						<p>
+							<input type="text" name="telefono" maxlength="9" value="<?php echo $_SESSION['telefono']; ?>" placeholder="Tel&eacute;fono" />
+						</p>
+						<p>
 							<input id="pass" type="password" name="pass" maxlength="50" placeholder="Actual contrase&ntilde;a" />
 						</p>
 						<p>

@@ -32,7 +32,7 @@
 				$mercado->modificarOferta($titulo, $descripcion, $_POST['imagen'], $_POST['modificar']);
 			} else
 				echo "\t\t\t\t" . '<p class="error">No se ha podido realizar la acci&oacute;n.</p>' . "\n";
-		} elseif (isset($_GET['eliminar'])) {
+		} elseif (isset($_GET['eliminar']) && is_numeric($_GET['eliminar'])) {
 			$codigoOferta = $_GET['eliminar'];
 			$usuarioOferta = $mercado->getUsuarioOferta($codigoOferta); // Cogemos el usuario que ha escrito la oferta.
 			if ($usuarioOferta == $_SESSION['codigo'] || $_SESSION['tipo'] == 1) // Si el usuario que ha pedido elimimar la oferta es el mismo que la ha escrito, o ha sido el administrador, eliminaremos la oferta.
@@ -42,19 +42,37 @@
 		}
 	}
 	
-	$datosMercado = $mercado->getMercado(); // Pedimos a la base de datos las ofertas disponibles.
+	/* Pedimos a la base de datos las 10 ofertas que queremos sacar por pantalla. */
+	if (isset($_GET['pagina']) && is_numeric($_GET['pagina'])) {
+		$desde = ($_GET['pagina'] - 1) * 5; // Variable en la que indicaremos desde que registro queremos mostrar ofertas por pantalla.
+		$datosMercado = $mercado->getMercado($desde); // Pedimos a la base de datos las ofertas disponibles.
+	} else // Si no ha pedido ninguna pagina en especial, sacamos las 5 primeras ofertas.
+		$datosMercado = $mercado->getMercado(0);
 	
 	/* Mostramos dichas ofertas por pantalla. */
 	$limite = count($datosMercado);
-	for ($i = 0; $i < $limite; $i++) {
-		echo "\t\t\t\t" . '<div class="mensaje">' . "\n";
-		if ((isset($_SESSION['nombre']) && $_SESSION['nombre'] == $datosMercado[$i][3]) || (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 1))
-			echo "\t\t\t\t\t" . '<p class="opciones"><a href="index.php?modificar=' . $datosMercado[$i][0] . '">Modificar</a> <a href="index.php?eliminar=' . $datosMercado[$i][0] . '">Eliminar</a></p>' . "\n";
-		echo "\t\t\t\t\t" . '<h2>' . $datosMercado[$i][1] . '</h2>' . "\n";		
-		echo "\t\t\t\t\t" . '<p>Por ' . $datosMercado[$i][3] . ', el ' . $datosMercado[$i][4] . '</p>' . "\n";
-		echo "\t\t\t\t\t" . '<p>' . $datosMercado[$i][2] . '</p>' . "\n";
-		echo "\t\t\t\t" . '</div>' . "\n";
+	if ($limite > 0) { // De no  haber ofertas, mostraremos un "error".
+		for ($i = 0; $i < $limite; $i++) {
+			echo "\t\t\t\t" . '<div class="mensaje">' . "\n";
+			if ((isset($_SESSION['nombre']) && $_SESSION['nombre'] == $datosMercado[$i][3]) || (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 1))
+				echo "\t\t\t\t\t" . '<p class="opciones"><a href="index.php?modificar=' . $datosMercado[$i][0] . '">Modificar</a> <a href="index.php?eliminar=' . $datosMercado[$i][0] . '">Eliminar</a></p>' . "\n";
+			echo "\t\t\t\t\t" . '<h2>' . $datosMercado[$i][1] . '</h2>' . "\n";		
+			echo "\t\t\t\t\t" . '<p>Por ' . $datosMercado[$i][3] . ', el ' . $datosMercado[$i][4] . '</p>' . "\n";
+			echo "\t\t\t\t\t" . '<p>' . $datosMercado[$i][2] . '</p>' . "\n";
+			echo "\t\t\t\t" . '</div>' . "\n";
+		}
+	} else
+		echo "\t\t\t\t" . '<p class="error">No hay ofertas o la p&aacute;gina seleccionada no existe.</p>' . "\n";
+	
+	/* Mostramos la paginacion tras las ofertas. */
+	echo "\t\t\t\t" . '<div id="paginas">' . "\n";
+	echo "\t\t\t\t\t" . '<p>' . "\n";
+	$totalPaginas = $mercado->getNumeroOfertas() / 5; // Entre 5 para sacar el numero de paginas de 5 ofertas que tenemos en total.
+	for ($i = 0; $i < $totalPaginas; $i++) {
+		echo "\t\t\t\t\t\t" . '<a href="index.php?pagina=' . ($i + 1) . '">' . ($i + 1) . '</a>' . "\n";
 	}
+	echo "\t\t\t\t\t" . '</p>' . "\n";
+	echo "\t\t\t\t" . '</div>' . "\n";
 	
 	/* Si el usuario esta logueado en el sistema, podra modificar una oferta suya o anadir una nueva. */
 	if (isset($_SESSION['codigo'])) {

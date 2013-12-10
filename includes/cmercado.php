@@ -21,12 +21,16 @@
 			return $this->_conexion;
 		}
 		
-		public function getMercado() {
-			return $this->_getConexion()->execute("SELECT mercado.codigo, titulo, descripcion, nombre, fecha FROM mercado, usuarios WHERE mercado.usuario = usuarios.codigo ORDER BY fecha DESC", array());
+		public function getMercado($desde) {
+			return $this->_getConexion()->execute("SELECT mercado.codigo, titulo, descripcion, nombre, fecha FROM mercado, usuarios WHERE mercado.usuario = usuarios.codigo ORDER BY fecha DESC LIMIT ?, 5", array($desde));
 		}
 		
 		public function getDatosOferta($codigo) {
 			return $this->_getConexion()->execute("SELECT titulo, descripcion FROM mercado WHERE codigo = ?", array($codigo));
+		}
+		
+		public function getNumeroOfertas() {
+			return $this->_getConexion()->executeScalar("SELECT COUNT(*) FROM mercado", array());
 		}
 		
 		public function getUsuarioOferta($codigo) {

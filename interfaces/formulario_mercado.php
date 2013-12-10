@@ -8,9 +8,9 @@
 							<!-- <textarea name="descripcion" rows="20" cols="80"></textare> -->
 							<input type="text" name="descripcion" maxlength="1000" <?php echo (isset($descripcion))?'value="' . $descripcion . '"':'placeholder="Descripci&oacute;n del mensaje"'; ?> />
 						</p>
-						<p>
-							<input type="file" name="imagen" />
-						</p>
+						<div id='espacio_seleccionar_imagen'>
+							<input id='seleccionar_imagen' type="file" name="imagen" />
+						</div>
 						<p>
 <?php
 	/*** set a form token ***/
