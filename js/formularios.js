@@ -174,12 +174,14 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 /* Cuando haya que enviar una contrasena al servidor, la hasheamos antes de enviarla. */
 /* De esta forma, evitaremos que alguien escuchando la red pueda ver las contrasenas en texto plano. */
 function enviarDatos(formulario, contrasena1, contrasena2, contrasena3) {
+	/* Siempre entrara la primera contrasena en esta funcion. La hasheamos para que no se vea por el POST en texto plano. */
 	contrasena1.value = hex_sha512(contrasena1.value);
 	
-	if (!contrasena2.value==='')
+	/* Como no siempre metemos estas dos contrasenas en esta funcion, solo pasaremos el hash cuando las metamos. */
+	if (contrasena2 != undefined)
 		contrasena2.value = hex_sha512(contrasena2.value);
-	if (!contrasena3.value==='')
+	if (contrasena3 != undefined)
 		contrasena3.value = hex_sha512(contrasena3.value);
 	
-	formulario.submit();
+	formulario.submit(); // Enviamos el formulario.
 }

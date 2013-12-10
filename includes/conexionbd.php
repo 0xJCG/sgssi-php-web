@@ -19,13 +19,13 @@
 			return self::$_miConexionBD;
 		}
 		
-		private function _replaceParams($coincidencias) {
+		private function replaceParams($coincidencias) {
 			$b = current($this->_parametros);
 			next($this->_parametros); 
 			return $b;
 		}
 		
-		private function _prepare($sql, $parametros) {
+		private function prepare($sql, $parametros) {
 			for ($i = 0; $i < sizeof($parametros); $i++) {
 				if (is_bool($parametros[$i]))
 					$parametros[$i] = $parametros[$i]?1:0;
@@ -39,12 +39,12 @@
 					$parametros[$i] = "'" . $this->_mySQL->escapar($parametros[$i]) . "'";
 			}
 			$this->_parametros = $parametros;
-			$q = preg_replace_callback("/(\?)/i", array($this, "_replaceParams"), $sql);
+			$q = preg_replace_callback("/(\?)/i", array($this, "replaceParams"), $sql);
 			return $q;
 		}
 		
-		private function _sendQuery($q, $parametros) {
-			$query = $this->_prepare($q, $parametros);
+		private function sendQuery($q, $parametros) {
+			$query = $this->prepare($q, $parametros);
 			$result = $this->_mySQL->ejecutar($query);
 			if ($this->_mySQL->getErrorNo()) {
 				throw new Exception("Ha habido un problema a la hora de realizar la sentencia SQL.");
@@ -53,7 +53,7 @@
 		}
 		
 		public function executeScalar($q, $parametros=null) {
-			$result = $this->_sendQuery($q, $parametros);
+			$result = $this->sendQuery($q, $parametros);
 			if (!is_null($result)) {
 				if (!is_object($result))
 					return $result;
@@ -66,7 +66,7 @@
 		}
 		
 		public function execute($q, $parametros=null) {
-			$result = $this->_sendQuery($q, $parametros);
+			$result = $this->sendQuery($q, $parametros);
 			if (is_object($result)) {
 				$arr = array();
 				while ($row = $this->_mySQL->recogerResultado($result))

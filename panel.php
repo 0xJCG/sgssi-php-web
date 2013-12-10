@@ -10,16 +10,21 @@
 	$cusuario = CUsuario::getCUsuario();
 	
 	if (isset($_SESSION['codigo'])) { // Solo dejaremos acceder al panel de usuario a los usuarios logueado en el sistema.
-		if (isset($_POST['panel']) && $_POST['panel'] == 1) {
-			if ($_SESSION['form_token'] != $_POST['form_token']) {
+		if (isset($_POST['panel']) && $_POST['panel'] == 1) { // Si se ha pulsado el formulario.
+			if ($_SESSION['token'] != $_POST['token']) { // El formulario debe provenir de la pagina adecuada, no debe ser una copia.
 				require 'interfaces/formulario_panel.php';
-			} else {
-				if ($_POST['pass1'] == $_POST['pass2']) {
+			} else { // El formulario es correcto.
+				if ($_POST['pass1'] == $_POST['pass2']) { // Si se modifica la contrasena, estas deben coincidir. Si no se modifican, esta condicion siempre sera TRUE.
+					/* Filtramos los input. */
 					$correo = filter_var($_POST['correo'], FILTER_SANITIZE_STRING);
 					$telefono = filter_var($_POST['telefono'], FILTER_SANITIZE_STRING);
 					$contrasenaV = $_POST['pass'];
 					$contrasenaN = $_POST['pass1'];
+					
+					/* Modificamos el usuario. */
 					$cusuario->modificarUsuario($correo, $telefono, $contrasenaN, $contrasenaV);
+					
+					echo "\t\t\t\t" . '<p class="ok">Datos modificados.</p>' . "\n";
 				}
 				require 'interfaces/formulario_panel.php';
 			}

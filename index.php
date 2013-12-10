@@ -81,8 +81,8 @@
 			$usuarioOferta = $mercado->getUsuarioOferta($codigoOferta); // Cogemos el usuario original que ha escrito la oferta.
 			if ($usuarioOferta == $_SESSION['codigo'] || $_SESSION['tipo'] == 1) { // Si el usuario que ha pedido modificar la oferta es el mismo que la ha escrito, o ha sido el administrador, mostraremos el formulario.
 				$datosOferta = $mercado->getDatosOferta($codigoOferta);
-				$titulo = $datosOferta[0][0];
-				$descripcion = $datosOferta[0][1];
+				$tituloOf = $datosOferta[0][0];
+				$descripcionOf = $datosOferta[0][1];
 			} else
 				echo "\t\t\t\t" . '<p class="error">No tienes permisos para modificar la oferta seleccionada.</p>' . "\n";
 		}

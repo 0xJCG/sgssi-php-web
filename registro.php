@@ -6,24 +6,45 @@
 	
 	require 'interfaces/cabecera.php';
 	
-	if (isset($_POST['registro']) && $_POST['registro'] == 1) {
-		if ($_SESSION['form_token'] != $_POST['form_token'])
+	if (isset($_POST['registro']) && $_POST['registro'] == 1) { // Si se ha pulsado en el boton de registrar.
+		if ($_SESSION['token'] != $_POST['token']) // Si el token del formulario no coincide con el de la sesion, es que el formulario no se ha enviado desde el lugar correcto.
 			require 'interfaces/formulario_registro.php';
 		else {
-			$usuario = filter_var($_POST['usuario'], FILTER_SANITIZE_STRING);
-			$correo = filter_var($_POST['correo'], FILTER_SANITIZE_STRING);
-			$telefono = filter_var($_POST['telefono'], FILTER_SANITIZE_STRING);
-			$contrasena = $_POST['pass1'];
-			$sal = hash("sha512", substr(sha1(mt_rand()), 0, 22)); // Sal.
+			$contrasena1 = $_POST['pass1'];
+			$contrasena2 = $_POST['pass2'];
 			
-			require 'includes/cusuario.php';
-			$cusuario = CUsuario::getCUsuario();
-			
-			$cusuario->registrar($usuario, $correo, $telefono, $contrasena, $sal);
-			
-			echo "Usuario $usuario registrado y conectado.";
+			if ($contrasena1 === $contrasena2) { // Comprobamos que las contrasenas coincidan para poder continuar.
+				/* Filtramos los input del formulario. */
+				$usuario = filter_var($_POST['usuario'], FILTER_SANITIZE_STRING);
+				$correo = filter_var($_POST['correo'], FILTER_SANITIZE_STRING);
+				$telefono = filter_var($_POST['telefono'], FILTER_SANITIZE_STRING);
+				
+				/* Volvemos a filtrar el usuario por si ha metido alguna etiqueta no deseable. */
+				require 'includes/inputfilter.php';
+				$filtro = new InputFilter();
+				$usuario = $filtro->process($usuario);
+				
+				/* Creamos la sal propia para el usuario. */
+				$sal = hash("sha512", substr(sha1(mt_rand()), 0, 22)); // Sal.
+				
+				/* Llamamos a la clase que contiene los metodos de los usuarios. */
+				require 'includes/cusuario.php';
+				$cusuario = CUsuario::getCUsuario();
+				
+				$usuarioRegistrado = $cusuario->registrar($usuario, $correo, $telefono, $contrasena1, $sal);
+				
+				if ($usuarioRegistrado) // Comprobamos que el usuairo se haya registrado correctamente.
+					echo "\t\t\t\t" . '<p class="error">Usuario ' . $usuario . ' registrado y conectado.</p>' . "\n";
+				else { // El registro ha fallado.
+					echo "\t\t\t\t" . '<p class="error">El nombre de usuario o el correo electr&oacute;nico ya est&aacute;n en uso.</p>' . "\n";
+					require 'interfaces/formulario_registro.php';
+				}
+			} else { // Las contrasenas no coinciden.
+				echo "\t\t\t\t" . '<p class="error">Las contrase&ntilde;as no coinciden.</p>' . "\n";
+				require 'interfaces/formulario_registro.php';
+			}
 		}
-	} else {
+	} else { // No se ha pulsado en registrar.
 		require 'interfaces/formulario_registro.php';
 	}
 	
