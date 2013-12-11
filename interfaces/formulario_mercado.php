@@ -1,16 +1,16 @@
 				<div class="formulario">
 					<h1><?php echo (isset($tituloOf))?'Modificar oferta':'Nueva oferta'; ?></h1>
-					<form id="formularioMercado" name="formularioMercado" action="index.php" method="post">
+					<form id="formularioMercado" name="formularioMercado" action="index.php" method="post" enctype="multipart/form-data">
 						<p>
 							<input type="text" name="titulo" maxlength="50" <?php echo (isset($tituloOf))?'value="' . $tituloOf . '"':'placeholder="T&iacute;tulo del mensaje"'; ?> />
 						</p>
 						<p>
 							<!-- <textarea name="descripcion" rows="20" cols="80"></textare> -->
 							<input type="text" name="descripcion" maxlength="1000" <?php echo (isset($descripcionOf))?'value="' . $descripcionOf . '"':'placeholder="Descripci&oacute;n del mensaje"'; ?> />
-						</p>
-						<!-- <div id='espacio_seleccionar_imagen'>
+						</p><!--  -->
+						<div id='espacio_seleccionar_imagen'>
 							<input id='seleccionar_imagen' type="file" name="imagen" />
-						</div> -->
+						</div>
 						<p>
 <?php
 	/********************************************************************************/

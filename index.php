@@ -38,7 +38,7 @@
 			/* Procesamos el titulo y la descripcion para eliminar posibles elementos no deseados en ellos. No debemos fiarnos del usuario. */
 			$titulo = $filtro->process($_POST['titulo']);
 			$descripcion = $filtro->process($_POST['descripcion']);
-			$mercado->anadirOferta($titulo, $descripcion, $_POST['imagen']);
+			$mercado->anadirOferta($titulo, $descripcion);
 		} elseif (isset($_POST['modificar'])) {
 			$codigoOferta = $_POST['modificar'];
 			$usuarioOferta = $mercado->getUsuarioOferta($codigoOferta); // Cogemos el usuario que ha escrito la oferta.
@@ -46,7 +46,7 @@
 				/* Procesamos el titulo y la descripcion para eliminar posibles elementos no deseados en ellos. No debemos fiarnos del usuario. */
 				$titulo = $filtro->process($_POST['titulo']);
 				$descripcion = $filtro->process($_POST['descripcion']);
-				$mercado->modificarOferta($titulo, $descripcion, $_POST['modificar'], $_POST['imagen']);
+				$mercado->modificarOferta($titulo, $descripcion, $_POST['modificar']);
 			} else
 				header('Location: index.php');
 		} elseif (isset($_GET['eliminar']) && ctype_digit($_GET['eliminar'])) {
@@ -86,11 +86,15 @@
 			echo "\t\t\t\t\t" . '<div class="datos_mensaje">' . "\n";
 			echo "\t\t\t\t\t\t" . '<p><img src="imagenes/usuario.png" /> ' . $datosMercado[$i][3] . '</p>' . "\n";
 			echo "\t\t\t\t\t\t" . '<p><img src="imagenes/telefono.png" /> ' . $datosMercado[$i][4] . '</p>' . "\n";
-			echo "\t\t\t\t\t\t" . '<p><img src="imagenes/fecha.png" /> ' . $datosMercado[$i][5] . '</p>' . "\n";
+			echo "\t\t\t\t\t\t" . '<p><img src="imagenes/fecha.png" /> ' . $datosMercado[$i][6] . '</p>' . "\n";
 			echo "\t\t\t\t\t" . '</div>' . "\n";
 			echo "\t\t\t\t\t" . '<div class="cuerpo_mensaje">' . "\n";
 			echo "\t\t\t\t\t\t" . '<h2>' . $datosMercado[$i][1] . '</h2>' . "\n";
 			echo "\t\t\t\t\t\t" . '<p>' . $datosMercado[$i][2] . '</p>' . "\n";
+			if ($datosMercado[$i][5] != null) { // De haber imagen, la sacamos.
+				$ruta = 'imagenes/ofertas/' . $datosMercado[$i][5];
+				echo "\t\t\t\t\t\t" . '<img class="imagenOferta" src="' . $ruta . '" />' . "\n";
+			}
 			echo "\t\t\t\t\t" . '</div>' . "\n";
 			if ((isset($_SESSION['nombre']) && $_SESSION['nombre'] == $datosMercado[$i][3]) || (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 1)) {
 				echo "\t\t\t\t\t" . '<div class="clear"></div>' . "\n";

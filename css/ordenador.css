@@ -112,3 +112,9 @@ a, a:visited {
 	margin-top: 15px;
 	text-align: center;
 }
+
+img.imagenOferta {
+	height: 50px;
+	width: 50px;
+	float: right;
+}
