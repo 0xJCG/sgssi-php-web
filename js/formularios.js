@@ -3,7 +3,7 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	$('#formularioRegistro').validate({ // Validar el formulario de registro. Usamos el id de HTML que le hemos puesto al formulario.
 		submitHandler: function(form) { // Cuando pulsamos el boton de registrar y todo ha ido bien, se envia el formulario.
 			//form.submit();
-			enviarDatos(form, document.getElementById('pass1'), document.getElementById('pass2'));
+			enviarDatosRegistro(form, document.getElementById('pass1'), document.getElementById('pass2'));
 		},
         rules: { // Reglas para validar el formulario.
 	        'usuario': {
@@ -60,7 +60,7 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
     });
 	$('#formularioPanel').validate({ // Validar el formulario del panel de usuario. Usamos el id de HTML que le hemos puesto al formulario.
 		submitHandler: function(form) { // Cuando pulsamos el boton de modificar y todo ha ido bien, se envia el formulario.
-			enviarDatos(form, document.getElementById('pass'), document.getElementById('pass1'), document.getElementById('pass2'));
+			enviarDatosPanel(form, document.getElementById('pass'), document.getElementById('pass1'), document.getElementById('pass2'));
 			//form.submit();
 		},
         rules: { // Reglas para validar el formulario.
@@ -118,7 +118,7 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	$('#formularioLogin').validate({ // Validar el formulario de login.
 		submitHandler: function(form) { // Cuando pulsamos el boton de conectar y todo ha ido bien, se envia el formulario.
 			//form.submit();
-			enviarDatos(form, document.getElementById('pass'));
+			enviarDatosLogin(form, document.getElementById('pass'));
 		},
         rules: { // Reglas para validar el formulario.
 	        'usuario': {
@@ -173,16 +173,30 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 
 /* Cuando haya que enviar una contrasena al servidor, la hasheamos antes de enviarla. */
 /* De esta forma, evitaremos que alguien escuchando la red pueda ver las contrasenas en texto plano. */
-function enviarDatos(formulario, contrasena1, contrasena2, contrasena3) {
+
+function enviarDatosLogin(formulario, contrasena) {
+	/* Siempre entrara la primera contrasena en esta funcion. La hasheamos para que no se vea por el POST en texto plano. */
+	contrasena.value = hex_sha512(contrasena.value);
+	formulario.submit(); // Enviamos el formulario.
+}
+
+function enviarDatosRegistro(formulario, contrasena1, contrasena2) {
+	/* Siempre entrara la primera contrasena en esta funcion. La hasheamos para que no se vea por el POST en texto plano. */
+	contrasena1.value = hex_sha512(contrasena1.value);
+	contrasena2.value = hex_sha512(contrasena2.value);
+	formulario.submit(); // Enviamos el formulario.
+}
+
+function enviarDatosPanel(formulario, contrasena1, contrasena2, contrasena3) {
 	/* Siempre entrara la primera contrasena en esta funcion. La hasheamos para que no se vea por el POST en texto plano. */
 	contrasena1.value = hex_sha512(contrasena1.value);
 	
 	/* Como no siempre metemos estas dos contrasenas en esta funcion, solo pasaremos el hash cuando las metamos. */
-	if (contrasena2.value == "")
+	if (contrasena2.value == "") {}
 	else
 		contrasena2.value = hex_sha512(contrasena2.value);
 	
-	if (contrasena3.value == "")
+	if (contrasena3.value == "") {}
 	else
 		contrasena3.value = hex_sha512(contrasena3.value);
 	

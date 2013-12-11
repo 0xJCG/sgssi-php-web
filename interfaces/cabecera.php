@@ -11,9 +11,21 @@
 	</head>
 	<body>
 		<div id="container">
-			<div id="header"><!--div: menubar, adbar, sidebar-->
-				<h1 id="pr_title"><a href="index.php">Cash4Trash</a></h1>
-				<h1 id="conectado">&iexcl;Hola, <?php echo (isset($_SESSION['nombre']))?'<a href="panel.php">' . $_SESSION['nombre'] . '</a>' . '! <a href="conectar.php?desconectar">Desconectar.</a>':'an&oacute;nimo! <a href="conectar.php">Conectar.</a>' ?></h1>
+			<div id="header">
+				<h1 id="titulo"><a href="index.php">Cash4Trash</a></h1>
+				<div id="conectado">
+<?php
+	if (isset($_SESSION['nombre'])) {
+		echo "\t\t\t\t\t" . '<h1>&iexcl;Hola, ' . $_SESSION['nombre'] . '!</h1>' . "\n";
+		echo "\t\t\t\t\t" . '<p><a href="panel.php">Panel de usuario</a>.</p>' . "\n";
+		echo "\t\t\t\t\t" . '<p><a href="conectar.php?desconectar">Cerrar sesi&oacute;n</a>.</p>' . "\n";
+	} else {
+		echo "\t\t\t\t\t" . '<h1 id="conectado">&iexcl;Hola, an&oacute;nimo!</h1>' . "\n";
+		echo "\t\t\t\t\t" . '<p><a href="conectar.php">Conectar</a>.</p>' . "\n";
+		echo "\t\t\t\t\t" . '<p><a href="registro.php">Registrar</a>.</p>' . "\n";
+	}
+?>
+				</div>
 			</div>
 			<div class="clear"></div>
 			<div id="maincontent">

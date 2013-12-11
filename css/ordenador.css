@@ -44,9 +44,6 @@ a, a:visited {
 	width: 970px;
 }
 
-#header {
-	/*margin-bottom: 20px;*/
-}
 
 #maincontent {
 	margin-top: 10px;
@@ -57,30 +54,22 @@ a, a:visited {
 	text-align: right;
 }
 
-#header p {
-	float: right;
-}
-
-#nav {
-	margin-bottom: 10px;
-}
-
-#nav p {
-    color: #6666FF;
-    font-variant: small-caps;
-    letter-spacing: 0.1ex;
-}
-
-#pr_title a {
-	text-decoration: none;
-}
-
-#pr_title {
+#titulo {
 	float: left;
+}
+
+#titulo a {
+	text-decoration: none;
 }
 
 #conectado {
 	float: right;
+	text-align: right;
+}
+
+#conectado a {
+	color: #FF6600;
+	text-decoration: none;
 }
 
 .mensaje {
@@ -120,5 +109,6 @@ a, a:visited {
 }
 
 #paginas {
+	margin-top: 15px;
 	text-align: center;
 }

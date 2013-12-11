@@ -1,5 +1,5 @@
 				<div class="formulario">
-					<h1>A&ntilde;adir un nuevo elemento al mercado</h1>
+					<h1><?php echo (isset($tituloOf))?'Modificar oferta':'Nueva oferta'; ?></h1>
 					<form id="formularioMercado" name="formularioMercado" action="index.php" method="post">
 						<p>
 							<input type="text" name="titulo" maxlength="50" <?php echo (isset($tituloOf))?'value="' . $tituloOf . '"':'placeholder="T&iacute;tulo del mensaje"'; ?> />
@@ -13,10 +13,13 @@
 						</div>
 						<p>
 <?php
-	/* Realizamos un token para evitar el Cross Site Request Forgery. */
-	/* Solo validaremos el formulario si ha sido enviado desde la propia web. */
-	/* Para ello, mas adelante se comprobara que este token sea el correcto, por lo que lo pondremos en el formulario actual y en una variable de sesion. */
-	/* Este token sera aleatorio. */
+	/********************************************************************************/
+	/* Realizamos un token para evitar el Cross Site Request Forgery.               */
+	/* Solo validaremos el formulario si ha sido enviado desde la propia web.       */
+	/* Para ello, mas adelante se comprobara que este token sea el correcto,        */
+	/* por lo que lo pondremos en el formulario actual y en una variable de sesion. */
+	/* Este token sera aleatorio.                                                   */
+	/********************************************************************************/
 	$token = md5(uniqid('auth', true));
 	$_SESSION['token'] = $token;
 ?>

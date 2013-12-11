@@ -46,16 +46,16 @@
 				/* Procesamos el titulo y la descripcion para eliminar posibles elementos no deseados en ellos. No debemos fiarnos del usuario. */
 				$titulo = $filtro->process($_POST['titulo']);
 				$descripcion = $filtro->process($_POST['descripcion']);
-				$mercado->modificarOferta($titulo, $descripcion, $_POST['imagen'], $_POST['modificar']);
+				$mercado->modificarOferta($titulo, $descripcion, $_POST['modificar'], $_POST['imagen']);
 			} else
-				echo "\t\t\t\t" . '<p class="error">No se ha podido realizar la acci&oacute;n.</p>' . "\n";
-		} elseif (isset($_GET['eliminar']) && is_numeric($_GET['eliminar'])) {
+				header('Location: index.php');
+		} elseif (isset($_GET['eliminar']) && ctype_digit($_GET['eliminar'])) {
 			$codigoOferta = $_GET['eliminar'];
 			$usuarioOferta = $mercado->getUsuarioOferta($codigoOferta); // Cogemos el usuario que ha escrito la oferta.
 			if ($usuarioOferta == $_SESSION['codigo'] || $_SESSION['tipo'] == 1) // Si el usuario que ha pedido elimimar la oferta es el mismo que la ha escrito, o ha sido el administrador, eliminaremos la oferta.
 				$mercado->eliminarOferta($codigoOferta);
 			else
-				echo "\t\t\t\t" . '<p class="error">No se ha podido realizar la acci&oacute;n.</p>' . "\n";
+				header('Location: index.php');
 		}
 	}
 	
@@ -64,7 +64,7 @@
 	/* ofertas que queremos sacar por         */
 	/* pantalla.                              */
 	/******************************************/
-	if (isset($_GET['pagina']) && is_numeric($_GET['pagina'])) { // La pagina debe ser un numero.
+	if (isset($_GET['pagina']) && ctype_digit($_GET['pagina'])) { // La pagina debe ser un numero.
 		$desde = ($_GET['pagina'] - 1) * 5; // Variable en la que indicaremos desde que registro queremos mostrar ofertas por pantalla.
 		$datosMercado = $mercado->getMercado($desde); // Pedimos a la base de datos las ofertas disponibles.
 	} else // Si no ha pedido ninguna pagina en especial o no es un numero, sacamos las 5 primeras ofertas por defecto.
@@ -85,7 +85,8 @@
 			echo "\t\t\t\t" . '<div class="mensaje">' . "\n";
 			echo "\t\t\t\t\t" . '<div class="datos_mensaje">' . "\n";
 			echo "\t\t\t\t\t\t" . '<p><img src="imagenes/usuario.png" /> ' . $datosMercado[$i][3] . '</p>' . "\n";
-			echo "\t\t\t\t\t\t" . '<p><img src="imagenes/fecha.png" /> ' . $datosMercado[$i][4] . '</p>' . "\n";
+			echo "\t\t\t\t\t\t" . '<p><img src="imagenes/telefono.png" /> ' . $datosMercado[$i][4] . '</p>' . "\n";
+			echo "\t\t\t\t\t\t" . '<p><img src="imagenes/fecha.png" /> ' . $datosMercado[$i][5] . '</p>' . "\n";
 			echo "\t\t\t\t\t" . '</div>' . "\n";
 			echo "\t\t\t\t\t" . '<div class="cuerpo_mensaje">' . "\n";
 			echo "\t\t\t\t\t\t" . '<h2>' . $datosMercado[$i][1] . '</h2>' . "\n";
@@ -102,7 +103,7 @@
 			echo "\t\t\t\t" . '</div>' . "\n";
 		}
 	} else // No hay ofertas.
-		echo "\t\t\t\t" . '<p class="error">No hay ofertas o la p&aacute;gina seleccionada no existe.</p>' . "\n";
+		echo "\t\t\t\t" . '<p>Todav&iacute;a no hay ofertas.</p>' . "\n";
 	
 	/******************************************/
 	/* Mostramos la paginacion.               */
@@ -122,15 +123,14 @@
 	/* usuario este debidamente conectado.    */
 	/******************************************/
 	if (isset($_SESSION['codigo'])) {
-		if (isset($_GET['modificar'])) { // Si el usuario ha pedido modificar una oferta, hay que asegurarse que ese usuario tenga permisos.
+		if (isset($_GET['modificar']) && ctype_digit($_GET['modificar'])) { // Si el usuario ha pedido modificar una oferta, hay que asegurarse que ese usuario tenga permisos.
 			$codigoOferta = $_GET['modificar'];
 			$usuarioOferta = $mercado->getUsuarioOferta($codigoOferta); // Cogemos el usuario original que ha escrito la oferta.
 			if ($usuarioOferta == $_SESSION['codigo'] || $_SESSION['tipo'] == 1) { // Si el usuario que ha pedido modificar la oferta es el mismo que la ha escrito, o ha sido el administrador, mostraremos el formulario.
 				$datosOferta = $mercado->getDatosOferta($codigoOferta);
 				$tituloOf = $datosOferta[0][0];
 				$descripcionOf = $datosOferta[0][1];
-			} else
-				echo "\t\t\t\t" . '<p class="error">No tienes permisos para modificar la oferta seleccionada.</p>' . "\n";
+			}
 		}
 		/* Si no ha pedido modificar nada, mostraremos el formulario de anadir oferta. */
 		require 'interfaces/formulario_mercado.php';

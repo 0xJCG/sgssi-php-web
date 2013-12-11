@@ -12,7 +12,7 @@
 	if (isset($_SESSION['codigo'])) { // Solo dejaremos acceder al panel de usuario a los usuarios logueado en el sistema.
 		if (isset($_POST['panel']) && $_POST['panel'] == 1) { // Si se ha enviado el formulario.
 			if ($_SESSION['token'] != $_POST['token']) { // El formulario debe provenir de la pagina adecuada, no debe ser una copia.
-				require 'interfaces/formulario_panel.php';
+				$error = "El formulario se ha enviado desde un lugar no apropiado.";
 			} else { // El formulario es correcto.
 				if ($_POST['pass1'] == $_POST['pass2']) { // Si se modifica la contrasena, estas deben coincidir. Si no se modifican, esta condicion siempre sera TRUE.
 					/* Filtramos los input. */
@@ -22,17 +22,19 @@
 					$contrasenaN = $_POST['pass1'];
 					
 					/* Modificamos el usuario. */
-					$cusuario->modificarUsuario($correo, $telefono, $contrasenaN, $contrasenaV);
+					$modificado = $cusuario->modificarUsuario($correo, $telefono, $contrasenaN, $contrasenaV);
 					
-					echo "\t\t\t\t" . '<p class="ok">Datos modificados.</p>' . "\n";
-				}
-				require 'interfaces/formulario_panel.php';
+					if ($modificado)
+						$aviso = "Datos modificados.";
+					else
+						$error = "No se han podido modificar los datos.";
+				} else // Las contrasenas no coinciden.
+					$error = "Las contrase&ntilde;as introducidas no coinciden.";
 			}
-		} else { // No se ha enviado el formulario.
-			require 'interfaces/formulario_panel.php';
 		}
 	} else // El usuario no tiene permisos.
-		echo "\t\t\t\t" . '<p class="error">No tienes permisos para acceder a esta secci&oacute;n.</p>' . "\n";
+		header('Location: index.php');
 	
+	require 'interfaces/formulario_panel.php';
 	require 'interfaces/pie.html';
 ?>

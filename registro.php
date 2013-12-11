@@ -8,7 +8,7 @@
 	
 	if (isset($_POST['registro']) && $_POST['registro'] == 1) { // Si se ha pulsado en el boton de registrar.
 		if ($_SESSION['token'] != $_POST['token']) // Si el token del formulario no coincide con el de la sesion, es que el formulario no se ha enviado desde el lugar correcto.
-			require 'interfaces/formulario_registro.php';
+			$error = "El formulario se ha enviado desde un lugar no apropiado.";
 		else {
 			$contrasena1 = $_POST['pass1'];
 			$contrasena2 = $_POST['pass2'];
@@ -19,7 +19,7 @@
 				$correo = filter_var($_POST['correo'], FILTER_SANITIZE_STRING);
 				$telefono = filter_var($_POST['telefono'], FILTER_SANITIZE_STRING);
 				
-				/* Volvemos a filtrar el usuario por si ha metido alguna etiqueta no deseable. */
+				/* Volvemos a filtrar el usuario por si ha metido alguna etiqueta no deseable, para evitar el XSS. */
 				require 'includes/inputfilter.php';
 				$filtro = new InputFilter();
 				$usuario = $filtro->process($usuario);
@@ -34,19 +34,13 @@
 				$usuarioRegistrado = $cusuario->registrar($usuario, $correo, $telefono, $contrasena1, $sal);
 				
 				if ($usuarioRegistrado) // Comprobamos que el usuairo se haya registrado correctamente.
-					echo "\t\t\t\t" . '<p class="error">Usuario ' . $usuario . ' registrado y conectado.</p>' . "\n";
-				else { // El registro ha fallado.
-					echo "\t\t\t\t" . '<p class="error">El nombre de usuario o el correo electr&oacute;nico ya est&aacute;n en uso.</p>' . "\n";
-					require 'interfaces/formulario_registro.php';
-				}
-			} else { // Las contrasenas no coinciden.
-				echo "\t\t\t\t" . '<p class="error">Las contrase&ntilde;as no coinciden.</p>' . "\n";
-				require 'interfaces/formulario_registro.php';
-			}
+					header('Location: panel.php');
+				else // El registro ha fallado.
+					$error = "El nombre de usuario o la contrase&ntilde;a ya est&aacute;n en uso.";
+			} else // Las contrasenas no coinciden.
+				$error = "Las contrase&ntilde;as no coinciden.";
 		}
-	} else { // No se ha pulsado en registrar.
-		require 'interfaces/formulario_registro.php';
 	}
-	
+	require 'interfaces/formulario_registro.php';	
 	require 'interfaces/pie.html';
 ?>

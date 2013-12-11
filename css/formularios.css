@@ -54,3 +54,13 @@ input, textarea {
 	margin-left: -145px;
 	opacity: 0;
 }
+
+p#error {
+	color: #FF6600;
+	margin: 10px 0 15px 5px;
+}
+
+p#aviso {
+	color: #0066FF;
+	margin: 10px 0 15px 5px;
+}

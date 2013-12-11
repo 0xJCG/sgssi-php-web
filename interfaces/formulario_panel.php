@@ -1,5 +1,13 @@
 				<div class="formulario">
 					<h1>Panel de usuario</h1>
+<?php 
+	if (isset($error)) { // Mostramos los errores por pantalla, de haberlos.
+		echo "\t\t\t\t\t" . '<p id="error">' . $error . '</p>' . "\n";
+	}
+	if (isset($aviso)) { // Mostramos los avisos por pantalla, de haberlos.
+		echo "\t\t\t\t\t" . '<p id="aviso">' . $aviso . '</p>' . "\n";
+	}
+?>
 					<form id="formularioPanel" name="formularioPanel" action="panel.php" method="post">
 						<p>
 							<input type="text" name="usuario" maxlength="50" value="<?php echo $_SESSION['nombre']; ?>" disabled="disabled" />
@@ -21,10 +29,13 @@
 						</p>
 						<p>
 <?php
-	/* Realizamos un token para evitar el Cross Site Request Forgery. */
-	/* Solo validaremos el formulario si ha sido enviado desde la propia web. */
-	/* Para ello, mas adelante se comprobara que este token sea el correcto, por lo que lo pondremos en el formulario actual y en una variable de sesion. */
-	/* Este token sera aleatorio. */
+	/********************************************************************************/
+	/* Realizamos un token para evitar el Cross Site Request Forgery.               */
+	/* Solo validaremos el formulario si ha sido enviado desde la propia web.       */
+	/* Para ello, mas adelante se comprobara que este token sea el correcto,        */
+	/* por lo que lo pondremos en el formulario actual y en una variable de sesion. */
+	/* Este token sera aleatorio.                                                   */
+	/********************************************************************************/
 	$token = md5(uniqid('auth', true));
 	$_SESSION['token'] = $token;
 ?>

@@ -22,7 +22,7 @@
 		}
 		
 		public function getMercado($desde) {
-			return $this->getConexion()->execute("SELECT mercado.codigo, titulo, descripcion, nombre, DATE_FORMAT(fecha,'%d-%m-%Y, %H:%i:%s') as mifecha FROM mercado, usuarios WHERE mercado.usuario = usuarios.codigo ORDER BY fecha DESC LIMIT ?, 5", array($desde));
+			return $this->getConexion()->execute("SELECT mercado.codigo, titulo, descripcion, nombre, usuarios.telefono, DATE_FORMAT(fecha,'%d-%m-%Y, %H:%i:%s') as mifecha FROM mercado, usuarios WHERE mercado.usuario = usuarios.codigo ORDER BY fecha DESC LIMIT ?, 5", array($desde));
 		}
 		
 		public function getDatosOferta($codigo) {
@@ -37,7 +37,7 @@
 			return $this->getConexion()->executeScalar("SELECT usuario FROM mercado WHERE codigo = ?", array($codigo));
 		}
 		
-		public function anadirOferta($titulo, $descripcion, $imagen) {
+		public function anadirOferta($titulo, $descripcion, $imagen = "") {
 			$this->getConexion()->execute("INSERT INTO mercado (titulo, descripcion, usuario, ruta_imagen, fecha) VALUES (?, ?, ?, ?, ?)", array($titulo, $descripcion, $_SESSION['codigo'], $imagen, date('Y-m-d H:i:s')));
 		}
 		
@@ -45,7 +45,7 @@
 			$this->getConexion()->execute("DELETE FROM mercado WHERE codigo = ?", array($codigo));
 		}
 		
-		public function modificarOferta($titulo, $descripcion, $imagen, $codigo) {
+		public function modificarOferta($titulo, $descripcion, $codigo, $imagen = "") {
 			$this->getConexion()->execute("UPDATE mercado SET titulo = ?, descripcion = ?, ruta_imagen = ?, fecha = ? WHERE codigo = ?", array($titulo, $descripcion, $imagen, date('Y-m-d H:i:s'), $codigo));
 		}
 		

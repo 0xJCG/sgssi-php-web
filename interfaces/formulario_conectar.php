@@ -1,5 +1,5 @@
 				<div class="formulario">
-					<h1>Formulario de conexi&oacute;n</h1>
+					<h1>Conectar</h1>
 					<form id="formularioLogin" name="formularioLogin" action="conectar.php" method="post">
 						<p>
 							<input type="text" name="usuario" maxlength="50" placeholder="Usuario" />
@@ -9,10 +9,13 @@
 						</p>
 						<p>
 <?php
-	/* Realizamos un token para evitar el Cross Site Request Forgery. */
-	/* Solo validaremos el formulario si ha sido enviado desde la propia web. */
-	/* Para ello, mas adelante se comprobara que este token sea el correcto, por lo que lo pondremos en el formulario actual y en una variable de sesion. */
-	/* Este token sera aleatorio. */
+	/********************************************************************************/
+	/* Realizamos un token para evitar el Cross Site Request Forgery.               */
+	/* Solo validaremos el formulario si ha sido enviado desde la propia web.       */
+	/* Para ello, mas adelante se comprobara que este token sea el correcto,        */
+	/* por lo que lo pondremos en el formulario actual y en una variable de sesion. */
+	/* Este token sera aleatorio.                                                   */
+	/********************************************************************************/
 	$token = md5(uniqid('auth', true));
 	$_SESSION['token'] = $token;
 ?>
