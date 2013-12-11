@@ -8,9 +8,9 @@
 							<!-- <textarea name="descripcion" rows="20" cols="80"></textare> -->
 							<input type="text" name="descripcion" maxlength="1000" <?php echo (isset($descripcionOf))?'value="' . $descripcionOf . '"':'placeholder="Descripci&oacute;n del mensaje"'; ?> />
 						</p>
-						<div id='espacio_seleccionar_imagen'>
+						<!-- <div id='espacio_seleccionar_imagen'>
 							<input id='seleccionar_imagen' type="file" name="imagen" />
-						</div>
+						</div> -->
 						<p>
 <?php
 	/********************************************************************************/

@@ -24,8 +24,8 @@
 						session_destroy(); // Se destruye la sesion.
 					}
 				} else { // Login no efectuado.
-					echo "\t\t\t\t" . '<p>No se ha podido conectar.</p>';
 					session_destroy();
+					header('Location: conectar.php');
 				}
 			}
 		} else // Si no se ha enviado el formulario.
