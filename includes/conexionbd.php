@@ -25,6 +25,7 @@
 			return $b;
 		}
 		
+		/* Prepara la sentencia SQL para que no haya caracteres raros. */
 		private function prepare($sql, $parametros) {
 			for ($i = 0; $i < sizeof($parametros); $i++) {
 				if (is_bool($parametros[$i]))
@@ -43,6 +44,7 @@
 			return $q;
 		}
 		
+		/* Se envia la SQL a la base de datos. */
 		private function sendQuery($q, $parametros) {
 			$query = $this->prepare($q, $parametros);
 			$result = $this->_mySQL->ejecutar($query);
@@ -52,6 +54,7 @@
 			return $result;
 		}
 		
+		/* Realiza una consulta en la que devuelve un unico parametro. */
 		public function executeScalar($q, $parametros=null) {
 			$result = $this->sendQuery($q, $parametros);
 			if (!is_null($result)) {
@@ -65,6 +68,7 @@
 			return null;
 		}
 		
+		/* Realiza una consulta en la que se devuelve mas de un parametro o se trata de un UPDATE, INSERT o DELETE. */
 		public function execute($q, $parametros=null) {
 			$result = $this->sendQuery($q, $parametros);
 			if (is_object($result)) {

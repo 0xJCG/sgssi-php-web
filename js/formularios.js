@@ -171,17 +171,16 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
     });
 });
 
-/* Cuando haya que enviar una contrasena al servidor, la hasheamos antes de enviarla. */
+/*****************************************************************************************************/
+/* Cuando haya que enviar una contrasena al servidor, la hasheamos antes de enviarla.                */
 /* De esta forma, evitaremos que alguien escuchando la red pueda ver las contrasenas en texto plano. */
-
+/*****************************************************************************************************/
 function enviarDatosLogin(formulario, contrasena) {
-	/* Siempre entrara la primera contrasena en esta funcion. La hasheamos para que no se vea por el POST en texto plano. */
 	contrasena.value = hex_sha512(contrasena.value);
 	formulario.submit(); // Enviamos el formulario.
 }
 
 function enviarDatosRegistro(formulario, contrasena1, contrasena2) {
-	/* Siempre entrara la primera contrasena en esta funcion. La hasheamos para que no se vea por el POST en texto plano. */
 	contrasena1.value = hex_sha512(contrasena1.value);
 	contrasena2.value = hex_sha512(contrasena2.value);
 	formulario.submit(); // Enviamos el formulario.
@@ -199,11 +198,6 @@ function enviarDatosPanel(formulario, contrasena1, contrasena2, contrasena3) {
 	if (contrasena3.value == "") {}
 	else
 		contrasena3.value = hex_sha512(contrasena3.value);
-	
-	/*if (contrasena2 != undefined || contrasena2.value != "")
-		contrasena2.value = hex_sha512(contrasena2.value);
-	if (contrasena3 != undefined || contrasena3.value != "")
-		contrasena3.value = hex_sha512(contrasena3.value);*/
 	
 	formulario.submit(); // Enviamos el formulario.
 }

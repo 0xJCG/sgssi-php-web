@@ -63,28 +63,30 @@
 		
 		/* Funcion que permite modificar los datos a un usuario. */
 		public function modificarUsuario($email, $telefono, $nuevaPass, $viejaPass) {
-			$viejaPass = hash("sha512", $viejaPass . $_SESSION['sal']);
-						
-			if ($nuevaPass == "")
+			$viejaPass = hash("sha512", $viejaPass . $_SESSION['sal']); // Debemos hacerlo para poder compararla con la contrasena de la base de datos.
+
+			if ($nuevaPass == "") // Si no se ha cambiado la contrasena, para no tener problemas, a la nueva contrasena le asignamos la vieja.
 				$nuevaPass = $viejaPass;
-			else
+			else // Hasheamos la nueva contrasena con la sal del usuario.
 				$nuevaPass = hash("sha512", $nuevaPass . $_SESSION['sal']);
+			
 			if ($_SESSION['contrasena'] != $viejaPass) // La contrasena actual tiene que coincidir con la introducida por el usuario en el formulario.
 				return false;
 			else {
 				if ($_SESSION['correo'] != $email) { // Si el correo se pretende modificar, debemos buscar que no exista en la base de datos.
-					$correo = $this->getConexion()->executeScalar("SELECT count(*) FROM usuarios WHERE correo = ?", array($email));
+					$correo = $this->getConexion()->executeScalar("SELECT COUNT(*) FROM usuarios WHERE correo = ?", array($email));
 					if ($correo != 0) // Si existe, no podemos continuar.
 						return false;
-					else {
+					else { // El correo no existe.
+						/* Asignamos los nuevos datos a las variables de sesion. */
 						$_SESSION['correo'] = $email;
 						$_SESSION['telefono'] = $telefono;
 						$_SESSION['contrasena'] = $nuevaPass;
 						$this->getConexion()->execute("UPDATE usuarios SET correo = ?, telefono = ?, contrasena = ? WHERE codigo = ?", array($email, $telefono, $nuevaPass, $_SESSION['codigo']));
 						return true;
 					}
-				}
-				else {
+				} else { // No se ha modificado el correo.
+					/* Asignamos los nuevos datos a las variables de sesion. */ 
 					$_SESSION['telefono'] = $telefono;
 					$_SESSION['contrasena'] = $nuevaPass;
 					$this->getConexion()->execute("UPDATE usuarios SET telefono = ?, contrasena = ? WHERE codigo = ?", array($telefono, $nuevaPass, $_SESSION['codigo']));
