@@ -178,9 +178,9 @@ function enviarDatos(formulario, contrasena1, contrasena2, contrasena3) {
 	contrasena1.value = hex_sha512(contrasena1.value);
 	
 	/* Como no siempre metemos estas dos contrasenas en esta funcion, solo pasaremos el hash cuando las metamos. */
-	if (contrasena2 != undefined)
+	if (contrasena2 != undefined || contrasena2.value != "")
 		contrasena2.value = hex_sha512(contrasena2.value);
-	if (contrasena3 != undefined)
+	if (contrasena3 != undefined || contrasena3.value != "")
 		contrasena3.value = hex_sha512(contrasena3.value);
 	
 	formulario.submit(); // Enviamos el formulario.

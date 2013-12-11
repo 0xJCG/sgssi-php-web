@@ -69,13 +69,12 @@
 				$nuevaPass = $viejaPass;
 			else
 				$nuevaPass = hash("sha512", $nuevaPass . $_SESSION['sal']);
-			
 			if ($_SESSION['contrasena'] != $viejaPass) // La contrasena actual tiene que coincidir con la introducida por el usuario en el formulario.
 				return false;
 			else {
 				if ($_SESSION['correo'] != $email) { // Si el correo se pretende modificar, debemos buscar que no exista en la base de datos.
-					$correo = $this->getConexion()->executeScalar("SELECT nombre FROM usuarios WHERE correo = ?", array($email));
-					if (!empty($correo)) // Si existe, no podemos continuar.
+					$correo = $this->getConexion()->executeScalar("SELECT count(*) FROM usuarios WHERE correo = ?", array($email));
+					if ($correo != 0) // Si existe, no podemos continuar.
 						return false;
 					else {
 						$_SESSION['correo'] = $email;
@@ -86,10 +85,9 @@
 					}
 				}
 				else {
-					$_SESSION['correo'] = $email;
 					$_SESSION['telefono'] = $telefono;
 					$_SESSION['contrasena'] = $nuevaPass;
-					$this->getConexion()->execute("UPDATE usuarios SET correo = ?, telefono = ?, contrasena = ? WHERE codigo = ?", array($email, $telefono, $nuevaPass, $_SESSION['codigo']));
+					$this->getConexion()->execute("UPDATE usuarios SET telefono = ?, contrasena = ? WHERE codigo = ?", array($telefono, $nuevaPass, $_SESSION['codigo']));
 					return true;
 				}
 			}
