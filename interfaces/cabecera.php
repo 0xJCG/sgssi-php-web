@@ -4,6 +4,7 @@
 		<title>Cash4Trash</title>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		<link href="css/ordenador.css" type="text/css" rel="stylesheet" />
+		<link rel="shortcut icon" href="imagenes/favicon.ico">
 		<script type="text/javascript" src="js/sha512.js"></script>
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
