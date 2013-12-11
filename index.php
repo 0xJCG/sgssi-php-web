@@ -1,10 +1,20 @@
 <?php
-	session_start();
+	session_start(); // Iniciamos sesion.
+	
+	/******************************************/
+	/* Utilizamos UTF-8 para codificar los    */
+	/* caracteres y evitar problemas con las  */
+	/* tildes.                                */
+	/******************************************/
 	$previous_encoding = mb_internal_encoding();
 	mb_internal_encoding('UTF-8');
 	mb_internal_encoding($previous_encoding);
 
-	require 'interfaces/cabecera.php';
+	/******************************************/
+	/* Clases que necesitamos para nuestras   */
+	/* funciones.                             */
+	/******************************************/
+	require 'interfaces/cabecera.php'; // Cabecera del html.
 	require 'includes/cmercado.php';
 	require 'includes/inputfilter.php';
 ?>
@@ -12,10 +22,17 @@
 					<p>Su navegador no soporta JavaScript o lo tiene deshabilitado. Necesita JavaScript para poder utilizar esta p&aacute;gina web de manera correcta.</p>
 				</noscript>
 <?php
+	/******************************************/
+	/* Creamos dos nuevas variables que nos   */
+	/* serviran para acceder a las funciones. */
+	/******************************************/
 	$mercado = CMercado::getCMercado();
 	$filtro = new InputFilter();
 	
-	/* Parte del procesamiento de ofertas. */
+	/******************************************/
+	/* Procesamiento de ofertas.              */
+	/* Procesamos los formularios de ofertas. */
+	/******************************************/
 	if (isset($_SESSION['codigo'])) { // Evitamos que el que no este logueado en el sistema pueda hacer cosas.
 		if (isset($_POST['anadir'])) { // Cualquiera que este logueado en el sistema puede anadir nuevos elementos.
 			/* Procesamos el titulo y la descripcion para eliminar posibles elementos no deseados en ellos. No debemos fiarnos del usuario. */
@@ -42,19 +59,29 @@
 		}
 	}
 	
-	/* Pedimos a la base de datos las 10 ofertas que queremos sacar por pantalla. */
-	if (isset($_GET['pagina']) && is_numeric($_GET['pagina'])) {
+	/******************************************/
+	/* Pedimos a la base de datos las 10      */
+	/* ofertas que queremos sacar por         */
+	/* pantalla.                              */
+	/******************************************/
+	if (isset($_GET['pagina']) && is_numeric($_GET['pagina'])) { // La pagina debe ser un numero.
 		$desde = ($_GET['pagina'] - 1) * 5; // Variable en la que indicaremos desde que registro queremos mostrar ofertas por pantalla.
 		$datosMercado = $mercado->getMercado($desde); // Pedimos a la base de datos las ofertas disponibles.
-	} else // Si no ha pedido ninguna pagina en especial, sacamos las 5 primeras ofertas.
+	} else // Si no ha pedido ninguna pagina en especial o no es un numero, sacamos las 5 primeras ofertas por defecto.
 		$datosMercado = $mercado->getMercado(0);
 	
+	/******************************************/
 	/* Mostramos dichas ofertas por pantalla. */
-	/* - \t: es una tabulacion. Es para indentar el codigo cuando se muestra el codigo fuente de una web. */
-	/* - \n: es un salto de linea en el codigo fuente. */
+	/* - \t: es una tabulacion. Es para       */
+	/*       indentar el codigo cuando se     */
+	/*       muestra el codigo fuente de      */
+	/*       una web.                         */
+	/* - \n: es un salto de linea en el       */
+	/*       codigo fuente.                   */
+	/******************************************/
 	$limite = count($datosMercado);
 	if ($limite > 0) { // De no  haber ofertas, mostraremos un "error".
-		for ($i = 0; $i < $limite; $i++) {
+		for ($i = 0; $i < $limite; $i++) { // Esto muestra el html de las ofertas.
 			echo "\t\t\t\t" . '<div class="mensaje">' . "\n";
 			echo "\t\t\t\t\t" . '<div class="datos_mensaje">' . "\n";
 			echo "\t\t\t\t\t\t" . '<p><img src="imagenes/usuario.png" /> ' . $datosMercado[$i][3] . '</p>' . "\n";
@@ -74,10 +101,12 @@
 			echo "\t\t\t\t\t" . '<div class="clear"></div>' . "\n";
 			echo "\t\t\t\t" . '</div>' . "\n";
 		}
-	} else
+	} else // No hay ofertas.
 		echo "\t\t\t\t" . '<p class="error">No hay ofertas o la p&aacute;gina seleccionada no existe.</p>' . "\n";
 	
-	/* Mostramos la paginacion tras las ofertas. */
+	/******************************************/
+	/* Mostramos la paginacion.               */
+	/******************************************/
 	echo "\t\t\t\t" . '<div id="paginas">' . "\n";
 	echo "\t\t\t\t\t" . '<p>' . "\n";
 	$totalPaginas = $mercado->getNumeroOfertas() / 5; // Entre 5 para sacar el numero de paginas de 5 ofertas que tenemos en total.
@@ -87,7 +116,11 @@
 	echo "\t\t\t\t\t" . '</p>' . "\n";
 	echo "\t\t\t\t" . '</div>' . "\n";
 	
-	/* Si el usuario esta logueado en el sistema, podra modificar una oferta suya o anadir una nueva. */
+	/******************************************/
+	/* Mostramos el formulario para anadir o  */
+	/* modificar ofertas, siempre y cuando el */
+	/* usuario este debidamente conectado.    */
+	/******************************************/
 	if (isset($_SESSION['codigo'])) {
 		if (isset($_GET['modificar'])) { // Si el usuario ha pedido modificar una oferta, hay que asegurarse que ese usuario tenga permisos.
 			$codigoOferta = $_GET['modificar'];
@@ -103,5 +136,8 @@
 		require 'interfaces/formulario_mercado.php';
 	}
 
+	/******************************************/
+	/* Mostramos el pie de la pagina web.     */
+	/******************************************/
 	require 'interfaces/pie.html';
 ?>
