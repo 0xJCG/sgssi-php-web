@@ -54,8 +54,8 @@
 			if (!empty($correo) || !empty($usuario)) // Si existen, no podemos continuar.
 				return false;
 			else {
-				/* Ejecutamos una sentencia INSERT para añadir al nuevo usuario en la base de datos. */
-				$this->_getConexion()->execute("INSERT INTO usuarios (nombre, correo, telefono, contrasena, sal) VALUES (?, ?, ?, ?, ?)", array($user, $email, $telefono, hash("sha512", $pass . $sal), $sal));
+				/* Ejecutamos una sentencia INSERT para aï¿½adir al nuevo usuario en la base de datos. */
+				$this->getConexion()->execute("INSERT INTO usuarios (nombre, correo, telefono, contrasena, sal) VALUES (?, ?, ?, ?, ?)", array($user, $email, $telefono, hash("sha512", $pass . $sal), $sal));
 				$this->login($user, $pass); // Logueamos al nuevo usuario.
 				return true;
 			}
@@ -81,7 +81,7 @@
 						$_SESSION['correo'] = $email;
 						$_SESSION['telefono'] = $telefono;
 						$_SESSION['contrasena'] = $nuevaPass;
-						$this->_getConexion()->execute("UPDATE usuarios SET correo = ?, telefono = ?, contrasena = ? WHERE codigo = ?", array($email, $telefono, $nuevaPass, $_SESSION['codigo']));
+						$this->getConexion()->execute("UPDATE usuarios SET correo = ?, telefono = ?, contrasena = ? WHERE codigo = ?", array($email, $telefono, $nuevaPass, $_SESSION['codigo']));
 						return true;
 					}
 				}
@@ -89,7 +89,7 @@
 					$_SESSION['correo'] = $email;
 					$_SESSION['telefono'] = $telefono;
 					$_SESSION['contrasena'] = $nuevaPass;
-					$this->_getConexion()->execute("UPDATE usuarios SET correo = ?, telefono = ?, contrasena = ? WHERE codigo = ?", array($email, $telefono, $nuevaPass, $_SESSION['codigo']));
+					$this->getConexion()->execute("UPDATE usuarios SET correo = ?, telefono = ?, contrasena = ? WHERE codigo = ?", array($email, $telefono, $nuevaPass, $_SESSION['codigo']));
 					return true;
 				}
 			}
