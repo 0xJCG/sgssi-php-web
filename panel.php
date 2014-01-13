@@ -18,11 +18,12 @@
 					/* Filtramos los input. */
 					$correo = filter_var($_POST['correo'], FILTER_SANITIZE_STRING);
 					$telefono = filter_var($_POST['telefono'], FILTER_SANITIZE_STRING);
+					$cbancaria = filter_var($_POST['cbancaria'], FILTER_SANITIZE_STRING);
 					$contrasenaV = $_POST['pass'];
 					$contrasenaN = $_POST['pass1'];
 					
 					/* Modificamos el usuario. */
-					$modificado = $cusuario->modificarUsuario($correo, $telefono, $contrasenaN, $contrasenaV);
+					$modificado = $cusuario->modificarUsuario($correo, $telefono, $cbancaria, $contrasenaN, $contrasenaV);
 					
 					if ($modificado)
 						$aviso = "Datos modificados.";

@@ -16,6 +16,9 @@
 							<input type="text" name="telefono" maxlength="9" placeholder="Tel&eacute;fono" />
 						</p>
 						<p>
+							<input type="text" name="cbancaria" maxlength="20" placeholder="Cuenta bancaria" />
+						</p>
+						<p>
 							<input id="pass1" type="password" name="pass1" maxlength="50" placeholder="Contrase&ntilde;a" />
 						</p>
 						<p>

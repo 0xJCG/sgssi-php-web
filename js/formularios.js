@@ -22,13 +22,19 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	        	minlength: 9,
 	        	maxlength: 9,
 	        },
+	        'cbancaria': {
+	        	required: true,
+	        	digits: true,
+	        	minlength: 20,
+	        	maxlength: 20,
+	        },
 	        'pass1': {
 	        	required: true,
-	        	minlength: 6,
+	        	minlength: 8,
 	        },
 	        'pass2': {
 	        	required: true,
-	        	minlength: 6,
+	        	minlength: 8,
 	        	equalTo: "#pass1"
 	        },
         },
@@ -47,13 +53,19 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	        	minlength: 'Tiene que tener 9 cifras.',
 	        	maxlength: 'Tiene que tener 9 cifras.',
 	        },
+	        'cbancaria': {
+	        	required: 'Es obligatorio introducir una cuenta bancaria.',
+	        	digits: 'La tarjeta de cr&eacute;dito es un n&uacute;mero de 20 cifras.',
+	        	minlength: 'Tiene que tener 20 cifras.',
+	        	maxlength: 'Tiene que tener 20 cifras.',
+	        },
 	        'pass1': {
 	        	required: 'Es obligatorio introducir una contrase&ntilde;a.',
-	        	minlength: 'Tiene que tener 6 caracteres como m&iacute;nimo.',
+	        	minlength: 'Tiene que tener 8 caracteres como m&iacute;nimo.',
 	        },
 	        'pass2': {
 	        	required: 'Es obligatorio volver a introducir la contrase&ntilde;a.',
-	        	minlength: 'Tiene que tener 6 caracteres como m&iacute;nimo.',
+	        	minlength: 'Tiene que tener 8 caracteres como m&iacute;nimo.',
 	        	equalTo: 'Las contrase&ntilde;as deben coincidir.',
 	        },
 	    },
@@ -75,17 +87,23 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	        	minlength: 9,
 	        	maxlength: 9,
 	        },
+	        'cbancaria': {
+	        	required: false,
+	        	digits: true,
+	        	minlength: 20,
+	        	maxlength: 20,
+	        },
 	        'pass': {
 	        	required: true,
-	        	minlength: 6,
+	        	minlength: 8,
 	        },
 	        'pass1': {
 	        	required: false,
-	        	minlength: 6,
+	        	minlength: 8,
 	        },
 	        'pass2': {
 	        	required: false,
-	        	minlength: 6,
+	        	minlength: 8,
 	        	equalTo: "#pass1"
 	        },
         },
@@ -100,17 +118,22 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	        	minlength: 'Tiene que tener 9 cifras.',
 	        	maxlength: 'Tiene que tener 9 cifras.',
 	        },
+	        'tcredito': {
+	        	digits: 'La tarjeta de cr&eacute;dito es un n&uacute;mero de 20 cifras.',
+	        	minlength: 'Tiene que tener 16 cifras.',
+	        	maxlength: 'Tiene que tener 16 cifras.',
+	        },
 	        'pass': {
 	        	required: 'Es obligatorio introducir la contrase&ntilde;a para realizar cambios.',
-	        	minlength: 'Tiene que tener 6 caracteres como m&iacute;nimo.',
+	        	minlength: 'Tiene que tener 8 caracteres como m&iacute;nimo.',
 	        },
 	        'pass1': {
 	        	required: 'Es obligatorio introducir una contrase&ntilde;a.',
-	        	minlength: 'Tiene que tener 6 caracteres como m&iacute;nimo.',
+	        	minlength: 'Tiene que tener 8 caracteres como m&iacute;nimo.',
 	        },
 	        'pass2': {
 	        	required: 'Es obligatorio volver a introducir la contrase&ntilde;a.',
-	        	minlength: 'Tiene que tener 6 caracteres como m&iacute;nimo.',
+	        	minlength: 'Tiene que tener 8 caracteres como m&iacute;nimo.',
 	        	equalTo: 'Las contrase&ntilde;as deben coincidir.',
 	        },
 	    },
@@ -128,7 +151,7 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	        },
 	        'pass': {
 	        	required: true,
-	        	minlength: 6,
+	        	minlength: 8,
 	        },
         },
 	    messages: { // Los mensajes que se muestran cuando no se cumple alguna de las normal mencionada arriba.
@@ -138,7 +161,7 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	        },
 	        'pass': {
 	        	required: 'Es obligatorio introducir una contrase&ntilde;a.',
-	        	minlength: 'Tiene que tener 6 caracteres como m&iacute;nimo.',
+	        	minlength: 'Tiene que tener 8 caracteres como m&iacute;nimo.',
 	        },
 	    },
     });

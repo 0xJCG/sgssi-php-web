@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `mercado` (
 --
 
 INSERT INTO `mercado` (`codigo`, `titulo`, `descripcion`, `usuario`, `ruta_imagen`, `fecha`) VALUES
-(5, 'Prueba 1', 'Prueba 1, prueba 1, prueba 1.', 1, '', '2013-12-08 16:47:28'),
+(5, 'Prueba 1', 'Prueba, prueba, prueba.', 1, '', '2013-12-08 16:47:28'),
 (6, 'Prueba 2', 'Prueba, prueba, prueba.', 1, '', '2013-12-10 15:56:10'),
 (7, 'Prueba 3', 'Prueba, prueba, prueba.', 1, '', '2013-12-10 15:56:15'),
 (8, 'Prueba 4', 'Prueba, prueba, prueba.', 1, '', '2013-12-10 15:56:19'),
@@ -54,8 +54,8 @@ INSERT INTO `mercado` (`codigo`, `titulo`, `descripcion`, `usuario`, `ruta_image
 (12, 'Prueba 8', 'Prueba, prueba, prueba.', 1, '', '2013-12-10 15:56:34'),
 (13, 'Prueba 9', 'Prueba, prueba, prueba.', 1, '', '2013-12-10 15:56:38'),
 (14, 'Prueba 10', 'Prueba, prueba, prueba.', 1, '', '2013-12-10 15:56:41'),
-(15, 'Prueba 11', 'Prueba 11, prueba, prueba.', 1, '', '2013-12-10 16:01:38'),
-(16, 'Prueba 12', 'Prueba 12, prueba, prueba.', 1, '', '2013-12-10 16:28:51');
+(15, 'Prueba 11', 'Prueba, prueba, prueba.', 1, '', '2013-12-10 16:01:38'),
+(16, 'Prueba 12', 'Prueba, prueba, prueba.', 1, '', '2013-12-10 16:28:51');
 
 -- --------------------------------------------------------
 

@@ -7,6 +7,18 @@
 	if (isset($aviso)) { // Mostramos los avisos por pantalla, de haberlos.
 		echo "\t\t\t\t\t" . '<p id="aviso">' . $aviso . '</p>' . "\n";
 	}
+	
+	/* Desciframos la cuenta bancaria. */
+	$cipher = mcrypt_module_open(MCRYPT_RIJNDAEL_256, '', MCRYPT_MODE_CBC, '');
+	$iv_size = mcrypt_enc_get_iv_size($cipher);
+	
+	$key = substr(sha1($_SESSION['sal']), 0, 32);
+	$iv =  substr(sha1(intval($_SESSION['nombre']) * $_SESSION['telefono'] / 2), 0, 32);
+	
+	if (mcrypt_generic_init($cipher, $key, $iv) != -1) {
+		$cbancaria = mdecrypt_generic($cipher, hex2bin($_SESSION['cbancaria']));
+		mcrypt_generic_deinit($cipher);
+	}
 ?>
 					<form id="formularioPanel" name="formularioPanel" action="panel.php" method="post">
 						<p>
@@ -17,6 +29,12 @@
 						</p>
 						<p>
 							<input type="text" name="telefono" maxlength="9" value="<?php echo $_SESSION['telefono']; ?>" placeholder="Tel&eacute;fono" />
+						</p>
+						<p>
+							Cuenta actual: ****************<?php echo substr($cbancaria, 16, 20); ?>.
+						</p>
+						<p>
+							<input type="text" name="cbancaria" maxlength="20" placeholder="Nueva cuenta bancaria" />
 						</p>
 						<p>
 							<input id="pass" type="password" name="pass" maxlength="50" placeholder="Actual contrase&ntilde;a" />
