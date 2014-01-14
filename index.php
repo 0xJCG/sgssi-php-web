@@ -117,7 +117,7 @@
 				echo "\t\t\t\t" . '</div>' . "\n";
 			}
 		} else // No hay ofertas.
-			echo "\t\t\t\t" . '<p>Todav&iacute;a no hay ofertas.</p>' . "\n";
+			echo "\t\t\t\t" . '<p id="error">Todav&iacute;a no hay ofertas.</p>' . "\n";
 		
 		/******************************************/
 		/* Mostramos la paginacion.               */

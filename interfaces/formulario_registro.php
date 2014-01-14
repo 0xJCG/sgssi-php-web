@@ -7,16 +7,16 @@
 ?>
 					<form id="formularioRegistro" name="formularioRegistro" action="registro.php" method="post">
 						<p>
-							<input id="usuario" type="text" name="usuario" maxlength="50" placeholder="Usuario" />
+							<input type="text" name="usuario" maxlength="50" placeholder="Usuario" />
 						</p>
 						<p>
-							<input id="correo" type="text" name="correo" maxlength="100" placeholder="Correo electr&oacute;nico" />
+							<input type="text" name="correo" maxlength="100" placeholder="Correo electr&oacute;nico" />
 						</p>
 						<p>
-							<input id="telefono" type="text" name="telefono" maxlength="9" placeholder="Tel&eacute;fono" />
+							<input type="text" name="telefono" maxlength="9" placeholder="Tel&eacute;fono" />
 						</p>
 						<p>
-							<input id="cbancaria" type="text" name="cbancaria" maxlength="20" placeholder="Cuenta bancaria" />
+							<input type="text" name="cbancaria" maxlength="20" placeholder="Cuenta bancaria" />
 						</p>
 						<p>
 							<input id="pass1" type="password" name="pass1" maxlength="50" placeholder="Contrase&ntilde;a" />
