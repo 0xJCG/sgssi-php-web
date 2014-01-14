@@ -25,16 +25,16 @@
 							<input type="text" name="usuario" maxlength="50" value="<?php echo $_SESSION['nombre']; ?>" disabled="disabled" />
 						</p>
 						<p>
-							<input type="text" name="correo" value="<?php echo $_SESSION['correo']; ?>" maxlength="100" />
+							<input id="correo" type="text" name="correo" value="<?php echo $_SESSION['correo']; ?>" maxlength="100" />
 						</p>
 						<p>
-							<input type="text" name="telefono" maxlength="9" value="<?php echo $_SESSION['telefono']; ?>" placeholder="Tel&eacute;fono" />
+							<input id="telefono" type="text" name="telefono" maxlength="9" value="<?php echo $_SESSION['telefono']; ?>" placeholder="Tel&eacute;fono" />
 						</p>
 						<p>
 							Cuenta actual: ****************<?php echo substr($cbancaria, 16, 20); ?>.
 						</p>
 						<p>
-							<input type="text" name="cbancaria" maxlength="20" placeholder="Nueva cuenta bancaria" />
+							<input id="cbancaria" type="text" name="cbancaria" maxlength="20" placeholder="Nueva cuenta bancaria" />
 						</p>
 						<p>
 							<input id="pass" type="password" name="pass" maxlength="50" placeholder="Actual contrase&ntilde;a" />

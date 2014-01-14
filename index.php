@@ -2,6 +2,17 @@
 	session_start(); // Iniciamos sesion.
 	
 	/******************************************/
+	/* Si han pasado 5 minutos desde la       */
+	/* ultima vez que el usuario ha           */
+	/* interactuado con la web, se destruye   */
+	/* la sesion como medida de seguridad.    */
+	/******************************************/
+	if (isset($_SESSION['tiempo']) && time() > $_SESSION['tiempo'] + 300) {
+		session_destroy();
+	} else
+		$_SESSION['tiempo'] = time();
+	
+	/******************************************/
 	/* Utilizamos UTF-8 para codificar los    */
 	/* caracteres y evitar problemas con las  */
 	/* tildes.                                */

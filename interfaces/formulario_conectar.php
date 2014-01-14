@@ -2,7 +2,7 @@
 					<h1>Conectar</h1>
 					<form id="formularioLogin" name="formularioLogin" action="conectar.php" method="post">
 						<p>
-							<input type="text" name="usuario" maxlength="50" placeholder="Usuario" />
+							<input id="usuario" type="text" name="usuario" maxlength="50" placeholder="Usuario" />
 						</p>
 						<p>
 							<input id="pass" type="password" name="pass" maxlength="50" placeholder="Contrase&ntilde;a" />
@@ -22,10 +22,6 @@
 							<input type="hidden" name="token" value="<?php echo $token; ?>" />
 							<input type="hidden" name="login" value="1" />
 							<input class="boton" type="submit" value="Conectar" />
-							<input class="boton" name="registrar" type="button" value="Registrar" onclick="window.open('registro.php','_self')" />
 						</p>
 					</form>
-					<script type="text/javascript">
-						$('#formularioLogin').attr('novalidate', 'novalidate');
-					</script>
 				</div>

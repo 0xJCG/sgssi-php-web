@@ -7,16 +7,16 @@
 ?>
 					<form id="formularioRegistro" name="formularioRegistro" action="registro.php" method="post">
 						<p>
-							<input type="text" name="usuario" maxlength="50" placeholder="Usuario" />
+							<input id="usuario" type="text" name="usuario" maxlength="50" placeholder="Usuario" />
 						</p>
 						<p>
-							<input type="text" name="correo" maxlength="100" placeholder="Correo electr&oacute;nico" />
+							<input id="correo" type="text" name="correo" maxlength="100" placeholder="Correo electr&oacute;nico" />
 						</p>
 						<p>
-							<input type="text" name="telefono" maxlength="9" placeholder="Tel&eacute;fono" />
+							<input id="telefono" type="text" name="telefono" maxlength="9" placeholder="Tel&eacute;fono" />
 						</p>
 						<p>
-							<input type="text" name="cbancaria" maxlength="20" placeholder="Cuenta bancaria" />
+							<input id="cbancaria" type="text" name="cbancaria" maxlength="20" placeholder="Cuenta bancaria" />
 						</p>
 						<p>
 							<input id="pass1" type="password" name="pass1" maxlength="50" placeholder="Contrase&ntilde;a" />
@@ -39,8 +39,6 @@
 							<input type="hidden" name="token" value="<?php echo $token; ?>" />
 							<input type="hidden" name="registro" value="1" />
 							<input class="boton" type="submit" value="Registrar" />
-							<!-- <input class="boton" name="registrar" type="button" value="Registrar" onclick="comprobarDatos(this.form)" /> -->
-							<input class="boton" name="volver" type="button" value="Volver" onclick="javascript:history.back()" />
 						</p>
 					</form>
 				</div>

@@ -1,5 +1,13 @@
 /* Codigo JavaScript escrito usando la libreria jQuery. */
 $(document).ready(function() { // Cuando el documento se carga, realiza las funciones siguientes.
+	jQuery.validator.addMethod("comprobarContrasena", function(value, element) {
+		return this.optional(element) || // Es una funcion opcional.
+			   /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // Contiene solo estos caracteres, ademas de:
+		       && /[a-z]/.test(value) // tener, al menos, una letra minuscula.
+		       && /[A-Z]/.test(value) // tener, al menos, una letra mayuscula.
+		       && /\d/.test(value) // tener, al menos, un numero.
+		       && /[!@#$%*()_+^&}{:;?.]/.test(value) // tener, al menos, un simbolo.
+	});
 	$('#formularioRegistro').validate({ // Validar el formulario de registro. Usamos el id de HTML que le hemos puesto al formulario.
 		submitHandler: function(form) { // Cuando pulsamos el boton de registrar y todo ha ido bien, se envia el formulario.
 			//form.submit();
@@ -30,11 +38,11 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	        },
 	        'pass1': {
 	        	required: true,
+	        	comprobarContrasena: true,
 	        	minlength: 8,
 	        },
 	        'pass2': {
 	        	required: true,
-	        	minlength: 8,
 	        	equalTo: "#pass1"
 	        },
         },
@@ -61,11 +69,11 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	        },
 	        'pass1': {
 	        	required: 'Es obligatorio introducir una contrase&ntilde;a.',
+	        	comprobarContrasena: 'La contrase&ntilde;a debe contener al menos un n&uacute;mero, una letra may&uacute;scula y un s&iacute;mbolo.',
 	        	minlength: 'Tiene que tener 8 caracteres como m&iacute;nimo.',
 	        },
 	        'pass2': {
 	        	required: 'Es obligatorio volver a introducir la contrase&ntilde;a.',
-	        	minlength: 'Tiene que tener 8 caracteres como m&iacute;nimo.',
 	        	equalTo: 'Las contrase&ntilde;as deben coincidir.',
 	        },
 	    },
@@ -99,11 +107,11 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	        },
 	        'pass1': {
 	        	required: false,
+	        	comprobarContrasena: true,
 	        	minlength: 8,
 	        },
 	        'pass2': {
 	        	required: false,
-	        	minlength: 8,
 	        	equalTo: "#pass1"
 	        },
         },
@@ -118,10 +126,10 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	        	minlength: 'Tiene que tener 9 cifras.',
 	        	maxlength: 'Tiene que tener 9 cifras.',
 	        },
-	        'tcredito': {
+	        'cbancaria': {
 	        	digits: 'La tarjeta de cr&eacute;dito es un n&uacute;mero de 20 cifras.',
-	        	minlength: 'Tiene que tener 16 cifras.',
-	        	maxlength: 'Tiene que tener 16 cifras.',
+	        	minlength: 'Tiene que tener 20 cifras.',
+	        	maxlength: 'Tiene que tener 20 cifras.',
 	        },
 	        'pass': {
 	        	required: 'Es obligatorio introducir la contrase&ntilde;a para realizar cambios.',
@@ -129,11 +137,11 @@ $(document).ready(function() { // Cuando el documento se carga, realiza las func
 	        },
 	        'pass1': {
 	        	required: 'Es obligatorio introducir una contrase&ntilde;a.',
+	        	comprobarContrasena: 'La nueva contrase&ntilde;a debe contener al menos un n&uacute;mero, una letra may&uacute;scula y un s&iacute;mbolo.',
 	        	minlength: 'Tiene que tener 8 caracteres como m&iacute;nimo.',
 	        },
 	        'pass2': {
 	        	required: 'Es obligatorio volver a introducir la contrase&ntilde;a.',
-	        	minlength: 'Tiene que tener 8 caracteres como m&iacute;nimo.',
 	        	equalTo: 'Las contrase&ntilde;as deben coincidir.',
 	        },
 	    },

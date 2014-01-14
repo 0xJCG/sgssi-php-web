@@ -1,0 +1,6 @@
+# Activamos el modulo rewrite.
+RewriteEngine on
+# Si no es un acceso por el puerto 443...
+RewriteCond %{SERVER_PORT} !443$
+# ...automaticamente, cambiamos de http a https. Si ya era https, no se ejecuta.
+RewriteRule ^(.*)$ https://localhost/SGSSI_Web
