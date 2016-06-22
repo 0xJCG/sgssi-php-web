@@ -1,10 +1,11 @@
-SGSSI_Web
-=========
+# SGSSI Web
 
-Los datos a modificar de la base de datos se encuentran en el fichero llamado "datos.php" que se encuentra en el directorio "includes".
+A developed webpage in PHP intended to test web vulnerabilites in it.
 
-El usuario por defecto es "admin", cuya contrasena es "seguridad".
+## Database
 
-Un saludo,
+Once installed the database in MySQL, the file that stores the connection parameters is /includes/datos.php.
 
-Jonathan Castro, Alberto Fernandez y Arkaitz Marcos.
+## Authors
+
+Jonathan Castro, Alberto Fernandez and Arkaitz Marcos.
